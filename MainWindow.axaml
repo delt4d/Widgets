@@ -5,26 +5,55 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="widgets"
-    d:DesignHeight="400"
-    d:DesignWidth="400"
-    mc:Ignorable="d"
     Width="400"
     Height="400"
-    TransparencyLevelHint="AcrylicBlur"
+    FontFamily="agave"
+    d:DesignHeight="400"
+    d:DesignWidth="400"
     Background="Transparent"
+    CanResize="False"
     ExtendClientAreaToDecorationsHint="True"
-    CanResize="False">
-    
+    TransparencyLevelHint="AcrylicBlur"
+    mc:Ignorable="d">
+
     <Panel>
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial 
+                <ExperimentalAcrylicMaterial
                     BackgroundSource="Digger"
+                    MaterialOpacity="0.50"
                     TintColor="Black"
-                    TintOpacity="1"
-                    MaterialOpacity="0.50" />
+                    TintOpacity="1" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
+
+        <Panel Margin="20">
+            <DockPanel>
+                <TextBlock 
+                    FontSize="20"
+                    HorizontalAlignment="Center" 
+                    DockPanel.Dock="Top">
+                    Timer
+                </TextBlock>
+
+                <Button
+                    FontSize="15"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Content="Start Timer"
+                    DockPanel.Dock="Bottom" />
+
+                <Panel  
+                    Margin="10"
+                    DockPanel.Dock="Top" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                    <TextBlock FontSize="60">
+                        00:00:00
+                    </TextBlock>    
+                </Panel>
+            </DockPanel>
+        </Panel>
     </Panel>
 
 </Window>

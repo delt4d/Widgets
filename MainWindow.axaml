@@ -36,13 +36,23 @@
                     Timer
                 </TextBlock>
 
-                <Button
-                    Click="StartTime"
-                    FontSize="15"
+                <StackPanel
+                    Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
-                    Content="Start Timer"
-                    DockPanel.Dock="Bottom" />
+                    DockPanel.Dock="Bottom">
+                    <Button 
+                        Name="PauseTimerButton"
+                        IsVisible="False"
+                        FontSize="15"
+                        Content="Pause Timer" />
+
+                    <Button
+                        Name="StartTimerButton"
+                        Click="StartTimer"
+                        FontSize="15"
+                        Content="Start Timer" />
+                </StackPanel>
 
                 <Panel  
                     Margin="10"

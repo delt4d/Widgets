@@ -1,57 +1,39 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Threading;
 
 namespace widgets;
 
 public partial class MainWindow : Window
 {
-    public DateTime TimerStartedAt { get; set; } = DateTime.UtcNow;
-    public DispatcherTimer? TimerDispatcher { get; set; }
+    private readonly TimerManager _timerManager = new();
 
     public MainWindow()
     {
         InitializeComponent();
+
+        _timerManager.OnTimerUpdateEvent += UpdateTimer;
+        _timerManager.OnTimerStartEvent += () =>
+        {
+            PauseTimerButton.IsVisible = true;
+            StartTimerButton.Content = "Reset Timer";
+        };
+        _timerManager.OnTimerStopEvent += () =>
+        {
+            PauseTimerButton.IsVisible = false;
+            StartTimerButton.Content = "Start Timer";
+        };
     }
 
-    public void StartTime(object sender, RoutedEventArgs e)
+    public void StartTimer(object sender, RoutedEventArgs e)
     {
-        if (TimerDispatcher is null)
-        {
-            TimerDispatcher = new DispatcherTimer(
-                TimeSpan.FromMilliseconds(500),
-                DispatcherPriority.Background,
-                (sender, e) => UpdateTimer());
-
-            TimerStartedAt = DateTime.UtcNow;
-            TimerDispatcher.Start();
-
-            UpdateTimer();
-        }
+        if (_timerManager.IsActive)
+            _timerManager.Stop();
         else
-        {
-            TimerDispatcher.Stop();
-            TimerDispatcher = null;
-            Timer.Text = "00:00:00";
-        }
+            _timerManager.Start();
     }
 
-    public void UpdateTimer()
+    public void UpdateTimer(TimerTime time)
     {
-        var now = DateTime.UtcNow;
-        var time = now - TimerStartedAt;
-        var hours = time.Hours.D2();
-        var minutes = time.Minutes.D2();
-        var seconds = time.Seconds.D2();
-        Timer.Text = $"{hours}:{minutes}:{seconds}";
-    }
-}
-
-public static class Extensions
-{
-    public static string D2(this int value)
-    {
-        return value.ToString("D2");
+        Timer.Text = time.Formatted;
     }
 }

@@ -27,15 +27,15 @@ public class TimerPause
         _pausedAt ??= DateTime.UtcNow;
     }
 
-    public void Reset()
-    {
-        _pausedAt = new DateTime();
-        TimePaused = TimeSpan.Zero;
-    }
-
     public void Finish()
     {
         TimePaused = GetTimePaused();
+        _pausedAt = null;
+    }
+
+    public void Reset()
+    {
+        TimePaused = TimeSpan.Zero;
         _pausedAt = null;
     }
 
@@ -78,11 +78,26 @@ public class TimerManager
 
         _data = new TimerData(
             new DispatcherTimer(TimeSpan.FromMilliseconds(500), DispatcherPriority.Background, (s, e) => HandleTimerUpdate()),
-            DateTime.UtcNow.AddSeconds(-1)
+            DateTime.UtcNow.AddMilliseconds(-850)
         );
 
         _data.Dispatcher.Start();
         OnTimerStartEvent?.Invoke();
+
+        HandleTimerUpdate();
+    }
+
+    public void Reset()
+    {
+        if (_data is null)
+            return;
+
+        _data.Dispatcher.Stop();
+        _data = null;
+
+        _pause.Reset();
+
+        OnTimerStopEvent?.Invoke();
 
         HandleTimerUpdate();
     }
@@ -106,21 +121,6 @@ public class TimerManager
         _pause.Start();
         _data.Dispatcher.Stop();
         OnTimerPause?.Invoke();
-    }
-
-    public void Reset()
-    {
-        if (_data is null)
-            return;
-
-        _data.Dispatcher.Stop();
-        _data = null;
-
-        _pause.Reset();
-
-        OnTimerStopEvent?.Invoke();
-
-        HandleTimerUpdate();
     }
 
     private void HandleTimerUpdate()

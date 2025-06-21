@@ -20,7 +20,7 @@ public class TimerPause
 {
     private DateTime? _pausedAt;
     public TimeSpan TimePaused { get; private set; }
-    public bool IsPaused => _pausedAt is not null;
+    public bool IsPaused => _pausedAt.HasValue;
 
     public void Start()
     {
@@ -41,13 +41,13 @@ public class TimerPause
 
     private TimeSpan GetTimePaused()
     {
-        if (_pausedAt is null)
+        if (!_pausedAt.HasValue)
             return TimeSpan.Zero;
 
-        var currentTimePaused = DateTime.UtcNow - _pausedAt;
+        var currentTimePaused = DateTime.UtcNow - _pausedAt.Value;
         var totalTimePaused = TimePaused + currentTimePaused;
 
-        return (TimeSpan)totalTimePaused;
+        return totalTimePaused;
     }
 }
 
@@ -94,11 +94,9 @@ public class TimerManager
 
         _data.Dispatcher.Stop();
         _data = null;
-
         _pause.Reset();
 
         OnTimerStopEvent?.Invoke();
-
         HandleTimerUpdate();
     }
 
@@ -109,6 +107,7 @@ public class TimerManager
 
         _data.Dispatcher.Start();
         _pause.Finish();
+
         OnTimerResume?.Invoke();
         HandleTimerUpdate();
     }
@@ -120,6 +119,7 @@ public class TimerManager
             
         _pause.Start();
         _data.Dispatcher.Stop();
+        
         OnTimerPause?.Invoke();
     }
 

@@ -43,6 +43,7 @@
                     DockPanel.Dock="Bottom">
                     <Button 
                         Name="PauseTimerButton"
+                        Click="PauseTimer"
                         IsVisible="False"
                         FontSize="15"
                         Content="Pause Timer" />

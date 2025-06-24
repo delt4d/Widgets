@@ -12,12 +12,18 @@ public static class WindowExtensions
         @this.Height = 250;
     }
 
-    public static void ApplyDefaultWindowProperties(this Window @this)
+    public static void ApplyDefaultWindowProperties(this Window @this, bool useTransparent = true)
     {
-        @this.Background = Brushes.Transparent;
+        @this.FontFamily = "agave";
         @this.CanResize = false;
         @this.ExtendClientAreaToDecorationsHint = true;
+        @this.Background = Brushes.Transparent;
         @this.TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
+
+        if (!useTransparent)
+        {
+            @this.Background = Brushes.Gray;
+        }
 
         var acrylic = new ExperimentalAcrylicBorder
         {

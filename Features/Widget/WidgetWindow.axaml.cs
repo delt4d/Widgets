@@ -7,7 +7,7 @@ public partial class WidgetWindow : Window
     public WidgetWindow()
     {
         InitializeComponent();
-        this.ApplyDefaultWindowProperties();
+        this.ApplyDefaultWindowProperties(false);
         this.ApplyWidgetDefaultProperties();
     }
 }

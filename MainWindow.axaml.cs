@@ -13,7 +13,7 @@ public partial class MainWindow : Window
 
     public void CreateNewWindowHandler(object? sender, RoutedEventArgs args)
     {
-        var window = new WidgetWindow()
+        var window = new WidgetWindow("https://github.com/delt4d/")
         {
             ShowInTaskbar = false
         };

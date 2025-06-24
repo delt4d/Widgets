@@ -4,69 +4,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
     Title="widgets"
     Width="400"
     Height="400"
-    FontFamily="agave"
-    d:DesignHeight="400"
-    d:DesignWidth="400"
-    Background="Transparent"
-    CanResize="False"
-    ExtendClientAreaToDecorationsHint="True"
-    TransparencyLevelHint="AcrylicBlur"
-    mc:Ignorable="d">
+    FontFamily="agave">
 
     <Panel>
-        <ExperimentalAcrylicBorder IsHitTestVisible="False">
-            <ExperimentalAcrylicBorder.Material>
-                <ExperimentalAcrylicMaterial
-                    BackgroundSource="Digger"
-                    MaterialOpacity="0.50"
-                    TintColor="Black"
-                    TintOpacity="1" />
-            </ExperimentalAcrylicBorder.Material>
-        </ExperimentalAcrylicBorder>
-
         <Panel Margin="20">
-            <DockPanel>
-                <TextBlock 
-                    FontSize="20"
-                    HorizontalAlignment="Center" 
-                    DockPanel.Dock="Top">
-                    Timer
-                </TextBlock>
-
-                <StackPanel
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Bottom"
-                    DockPanel.Dock="Bottom">
-                    <Button 
-                        Name="PauseTimerButton"
-                        Click="PauseTimer"
-                        IsVisible="False"
-                        FontSize="15"
-                        Content="Pause Timer" />
-
-                    <Button
-                        Name="StartTimerButton"
-                        Click="StartTimer"
-                        FontSize="15"
-                        Content="Start Timer" />
-                </StackPanel>
-
-                <Panel  
-                    Margin="10"
-                    DockPanel.Dock="Top" 
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
-                    <TextBlock  
-                        Name="Timer"
-                        FontSize="60">
-                        00:00:00
-                    </TextBlock>    
-                </Panel>
-            </DockPanel>
+            <Button
+                HorizontalAlignment="Center"
+                Name="StartTimerButton"
+                Click="CreateNewWindowHandler"
+                FontSize="15"
+                Content="Create Window" />
         </Panel>
     </Panel>
 

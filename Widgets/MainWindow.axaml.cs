@@ -20,7 +20,7 @@ public partial class MainWindow : Window
 
     public void CreateWebviewWindow(object? sender, RoutedEventArgs args)
     {
-        var widgetWindow = new WidgetWindow("https://github.com/delt4d/")
+        var widgetWindow = new WidgetWindow("http://127.0.0.1:5500/")
         {
             ShowInTaskbar = false
         };

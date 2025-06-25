@@ -11,12 +11,19 @@
 
     <Panel>
         <Panel Margin="20">
-            <Button
-                HorizontalAlignment="Center"
-                Name="StartTimerButton"
-                Click="CreateNewWindowHandler"
-                FontSize="15"
-                Content="Create Window" />
+            <StackPanel VerticalAlignment="Center">
+                <Button
+                    HorizontalAlignment="Center"
+                    Click="CreateWebviewWindow"
+                    FontSize="15"
+                    Content="Create Webview Window" />
+
+                <Button
+                    HorizontalAlignment="Center"
+                    Click="CreateTimerWindow"
+                    FontSize="15"
+                    Content="Create Timer Window" />
+            </StackPanel>
         </Panel>
     </Panel>
 

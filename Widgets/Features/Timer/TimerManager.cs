@@ -51,22 +51,26 @@ public class TimerPause
     }
 }
 
+public delegate void OnTimerUpdate(TimerTime Time);
+public delegate void OnTimerStart();
+public delegate void OnTimerStop();
+public delegate void OnPause();
+public delegate void OnResume();
+
+public class TimerManagerEvents
+{
+    public OnTimerUpdate? OnTimerUpdateEvent;
+    public OnTimerStart? OnTimerStartEvent;
+    public OnTimerStop? OnTimerStopEvent;
+    public OnPause? OnTimerPauseEvent;
+    public OnResume? OnTimerResumeEvent;
+}
+
 public class TimerManager
 {
-    public delegate void OnTimerUpdate(TimerTime Time);
-    public delegate void OnTimerStart();
-    public delegate void OnTimerStop();
-    public delegate void OnPause();
-    public delegate void OnResume();
-
-    public event OnTimerUpdate? OnTimerUpdateEvent;
-    public event OnTimerStart? OnTimerStartEvent;
-    public event OnTimerStop? OnTimerStopEvent;
-    public event OnPause? OnTimerPause;
-    public event OnResume? OnTimerResume;
-
     private TimerData? _data;
     private readonly TimerPause _pause = new();
+    public TimerManagerEvents? Events = null;
 
     public bool IsActive => _data is not null;
     public bool IsPaused => _pause.IsPaused;
@@ -82,7 +86,8 @@ public class TimerManager
         );
 
         _data.Dispatcher.Start();
-        OnTimerStartEvent?.Invoke();
+
+        Events?.OnTimerStartEvent?.Invoke();
 
         HandleTimerUpdate();
     }
@@ -96,7 +101,7 @@ public class TimerManager
         _data = null;
         _pause.Reset();
 
-        OnTimerStopEvent?.Invoke();
+        Events?.OnTimerStopEvent?.Invoke();
         HandleTimerUpdate();
     }
 
@@ -108,7 +113,7 @@ public class TimerManager
         _data.Dispatcher.Start();
         _pause.Finish();
 
-        OnTimerResume?.Invoke();
+        Events?.OnTimerResumeEvent?.Invoke();
         HandleTimerUpdate();
     }
 
@@ -116,16 +121,16 @@ public class TimerManager
     {
         if (_data is null)
             return;
-            
+
         _pause.Start();
         _data.Dispatcher.Stop();
-        
-        OnTimerPause?.Invoke();
+
+        Events?.OnTimerPauseEvent?.Invoke();
     }
 
     private void HandleTimerUpdate()
     {
-        if (OnTimerUpdateEvent is null)
+        if (Events?.OnTimerUpdateEvent is null)
             return;
 
         var timerTime = new TimerTime(TimeSpan.Zero);
@@ -136,6 +141,6 @@ public class TimerManager
             timerTime = new TimerTime(now - _data.TimerStart - _pause.TimePaused);
         }
 
-        OnTimerUpdateEvent.Invoke(timerTime);
+        Events?.OnTimerUpdateEvent.Invoke(timerTime);
     }
 }

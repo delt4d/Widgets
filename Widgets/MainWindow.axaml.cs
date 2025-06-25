@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using widgets.Features.Widget;
 
 namespace widgets;
 

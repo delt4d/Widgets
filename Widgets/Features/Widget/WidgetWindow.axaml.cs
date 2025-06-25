@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using WebViewControl;
 
-namespace widgets;
+namespace widgets.Features.Widget;
 
 public partial class WidgetWindow : Window
 {

@@ -1,7 +1,7 @@
 using System;
 using Avalonia.Threading;
 
-namespace widgets;
+namespace widgets.Features.Timer;
 
 public record TimerData(
     DispatcherTimer Dispatcher,

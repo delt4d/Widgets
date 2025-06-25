@@ -8,15 +8,20 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        this.ApplyDefaultWindowProperties();
+        
+        this.ApplyDefaultWindowProperties(prop =>
+        {
+            prop.ExtendClientAreaToDecorationsHint = true;
+            prop.Transparent = true;
+        });
     }
 
     public void CreateNewWindowHandler(object? sender, RoutedEventArgs args)
     {
-        var window = new WidgetWindow("https://github.com/delt4d/")
+        var widgetWindow = new WidgetWindow("https://github.com/delt4d/")
         {
             ShowInTaskbar = false
         };
-        window.Show(this);
+        widgetWindow.Show(this);
     }
 }

@@ -5,19 +5,25 @@ namespace widgets;
 
 public partial class WidgetWindow : Window
 {
+    public WebView WebViewComponent;
+
     public WidgetWindow(string url)
     {
         InitializeComponent();
-        this.ApplyDefaultWindowProperties(false);
-        this.ApplyWidgetDefaultProperties();
 
-        var webView = new WebView
+        WebViewComponent = new WebView
         {
             Address = url,
             HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch,
             VerticalAlignment = Avalonia.Layout.VerticalAlignment.Stretch
         };
 
-        Content = webView;
+        MainGrid.Children.Add(WebViewComponent);
+        
+        WebViewComponent.SetValue(Grid.RowProperty, 0);
+        WebViewComponent.SetValue(Grid.ColumnProperty, 0);
+
+        this.ApplyWidgetDefaultProperties();
+        this.ApplyDefaultWindowProperties();
     }
 }

@@ -8,7 +8,5 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Panel>
-        <TextBlock>Welcome to Avalonia!</TextBlock>
-    </Panel>
+    <Grid x:Name="MainGrid"></Grid>
 </Window>

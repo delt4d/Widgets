@@ -12,22 +12,26 @@ public static class WindowExtensions
         @this.Height = 250;
     }
 
-    public static void ApplyDefaultWindowProperties(this Window @this, bool useTransparent = true)
+    public static void ApplyDefaultWindowProperties(this Window @this, Action<ApplyDefaultWindowPropertiesConfig>? configure = null)
     {
+        var windowProperties = new ApplyDefaultWindowPropertiesConfig{ Transparent = true, ExtendClientAreaToDecorationsHint = false };
+
+        if (configure is not null)
+            configure(windowProperties);
+
+        @this.ExtendClientAreaToDecorationsHint = windowProperties.ExtendClientAreaToDecorationsHint;
         @this.FontFamily = "agave";
         @this.CanResize = false;
-        @this.ExtendClientAreaToDecorationsHint = true;
         @this.Background = Brushes.Transparent;
         @this.TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
 
-        if (!useTransparent)
+        if (!windowProperties.Transparent)
         {
             @this.Background = Brushes.Gray;
         }
 
         var acrylic = new ExperimentalAcrylicBorder
         {
-            IsHitTestVisible = false,
             Material = new ExperimentalAcrylicMaterial
             {
                 BackgroundSource = AcrylicBackgroundSource.Digger,
@@ -40,24 +44,30 @@ public static class WindowExtensions
 
         // Insert <ExperimentalAcrylicBorder />
 
-        if (@this.Content is Panel panel)
         {
-            panel.Children.Insert(0, acrylic);
-            return;
-        }
-
-        if (@this.Content is Control existing)
-        {
-            @this.Content = null;
-            panel = new StackPanel
+            if (@this.Content is Panel panel)
             {
-                Margin = new Avalonia.Thickness(10)
-            };
-            panel.Children.AddRange([acrylic, existing]);
-            @this.Content = panel;
-            return;
+                panel.Children.Insert(0, acrylic);
+                return;
+            }
+        }
+        {
+            if (@this.Content is Control existing)
+            {
+                @this.Content = null;
+                var panel = new StackPanel { Margin = new Avalonia.Thickness(10) };
+                panel.Children.AddRange([acrylic, existing]);
+                @this.Content = panel;
+                return;
+            }
         }
 
         throw new Exception("Window must have a Panel or Control.");
     }
+}
+
+public class ApplyDefaultWindowPropertiesConfig
+{
+    public required bool Transparent { get; set; }
+    public required bool ExtendClientAreaToDecorationsHint { get; set; }
 }

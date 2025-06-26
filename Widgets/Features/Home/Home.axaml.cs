@@ -25,7 +25,7 @@ public partial class HomeWindow : Window
 
     private void CreateWebviewWindow(object? sender, RoutedEventArgs args)
     {
-        var widgetWindow = new WidgetWindow("http://127.0.0.1:5500/"){ ShowInTaskbar = false };
+        var widgetWindow = new WidgetWindow("http://127.0.0.1:5500/") { ShowInTaskbar = false };
         widgetWindow.Show(this);
     }
 
@@ -33,5 +33,14 @@ public partial class HomeWindow : Window
     {
         var timerWindow = new TimerWindow();
         timerWindow.Show(this);
+    }
+
+    public void PositionWindow()
+    {
+        var screenSize = Screens.Primary!.WorkingArea.Size;
+        var windowSize = PixelSize.FromSize(ClientSize, Screens.Primary.Scaling);
+        Position = new PixelPoint(
+            screenSize.Width - windowSize.Width - 3,
+            screenSize.Height - windowSize.Height - 3);
     }
 }

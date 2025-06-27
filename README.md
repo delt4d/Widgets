@@ -1,3 +1,3 @@
 # Widgets
 
-<img src="./docs/preview.png" />
+<img src="./docs/preview_001.png" />

@@ -1,15 +1,27 @@
 using Avalonia.Controls;
 using WebViewControl;
 
-namespace widgets.Features.Widget;
+namespace widgets.Features.Widget.Windows;
 
 public partial class WidgetWindow : Window
 {
-    public WebView WebViewComponent;
+    public WebView? WebViewComponent;
 
     public WidgetWindow(string url)
     {
         InitializeComponent();
+        Initialize(url);
+    }
+
+    public WidgetWindow()
+    {
+        InitializeComponent();
+        Initialize(null);
+    }
+
+    private void Initialize(string? url)
+    {
+        url ??= "https://google.com/";
 
         WebViewComponent = new WebView
         {
@@ -19,7 +31,7 @@ public partial class WidgetWindow : Window
         };
 
         MainGrid.Children.Add(WebViewComponent);
-        
+
         WebViewComponent.SetValue(Grid.RowProperty, 0);
         WebViewComponent.SetValue(Grid.ColumnProperty, 0);
 

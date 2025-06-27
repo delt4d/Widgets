@@ -1,27 +1,41 @@
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using widgets.Features.Timer;
-using widgets.Features.Widget;
+using widgets.Features.Widget.Components;
+using widgets.Features.Widget.Windows;
 
 namespace widgets.Features.Home;
 
 public partial class HomeWindow : Window
 {
+    private readonly List<WidgetPanelControl> _widgets = [];
+
     public HomeWindow()
     {
         InitializeComponent();
 
         Width = 250;
         SizeToContent = SizeToContent.Height;
-        
+        SystemDecorations = SystemDecorations.BorderOnly;
+
         this.ApplyDefaultWindowProperties(prop =>
         {
             prop.ExtendClientAreaToDecorationsHint = true;
             prop.Transparent = false;
         });
 
-        SystemDecorations = SystemDecorations.BorderOnly;
+        _widgets.Add(new WidgetPanelControl(new WidgetPanelControlParams("Timer", CreateTimerWindow)));
+        _widgets.Add(new WidgetPanelControl(new WidgetPanelControlParams("Webview", CreateWebviewWindow)));
+
+        UpdateWidgetsList();
+    }
+
+    public void UpdateWidgetsList()
+    {
+        WidgetsPanel.Children.Clear();
+        WidgetsPanel.Children.AddRange(_widgets);
     }
 
     private void CreateWebviewWindow(object? sender, RoutedEventArgs args)

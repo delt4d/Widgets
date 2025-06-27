@@ -14,7 +14,8 @@ public partial class MainWindow : Window
         {
             Hide();
             var homeWindow = new HomeWindow();
-            homeWindow.Opened += (sender, e) => homeWindow.PositionWindow();
+            homeWindow.Opened += (_, _) => homeWindow.PositionWindow();
+            homeWindow.Closed += (_, _) => Close();
             homeWindow.Show();
         };
     }

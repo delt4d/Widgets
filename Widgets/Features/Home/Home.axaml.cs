@@ -12,15 +12,16 @@ public partial class HomeWindow : Window
     {
         InitializeComponent();
 
-        this.ApplyWidgetDefaultProperties();
+        Width = 250;
+        SizeToContent = SizeToContent.Height;
+        
         this.ApplyDefaultWindowProperties(prop =>
         {
             prop.ExtendClientAreaToDecorationsHint = true;
-            prop.Transparent = true;
+            prop.Transparent = false;
         });
 
         SystemDecorations = SystemDecorations.BorderOnly;
-        CornerRadius = new CornerRadius(0);
     }
 
     private void CreateWebviewWindow(object? sender, RoutedEventArgs args)

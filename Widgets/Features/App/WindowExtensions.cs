@@ -2,7 +2,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Media;
 
-namespace widgets;
+namespace widgets.Features.App;
 
 public static class WindowExtensions
 {

@@ -1,0 +1,1 @@
+global using static widgets.Features.App.WindowExtensions;

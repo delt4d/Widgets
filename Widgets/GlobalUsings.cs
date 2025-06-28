@@ -1,1 +1,1 @@
-global using static widgets.Features.App.WindowExtensions;
+global using widgets.Features.App;

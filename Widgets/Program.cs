@@ -1,5 +1,6 @@
-﻿using Avalonia;
-using System;
+﻿using System;
+using Avalonia;
+using widgets.Features.App;
 
 namespace widgets;
 

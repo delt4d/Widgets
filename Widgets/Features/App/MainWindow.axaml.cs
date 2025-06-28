@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using widgets.Features.Home;
 
-namespace widgets.Features.Main;
+namespace widgets.Features.App;
 
 public partial class MainWindow : Window
 {

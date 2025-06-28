@@ -1,6 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using widgets.Features.Timer;
 using widgets.Features.Widget.Components;
@@ -38,9 +44,88 @@ public partial class HomeWindow : Window
         WidgetsPanel.Children.AddRange(_widgets);
     }
 
-    private void CreateWebviewWindow(object? sender, RoutedEventArgs args)
+    private static async Task<bool> IsServerRunningAsync(string url)
     {
-        var widgetWindow = new WidgetWindow("http://127.0.0.1:5500/") { ShowInTaskbar = false };
+        try
+        {
+            using var client = new HttpClient();
+            client.Timeout = TimeSpan.FromSeconds(2);
+            var response = await client.GetAsync(url);
+            return response.IsSuccessStatusCode;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private void StartLocalSampleWebviewServer()
+    {
+        try
+        {
+            Cursor = new Cursor(StandardCursorType.Wait);
+
+            var workingDir = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"../../../../Widgets.SampleWebView"));
+
+            // Step 1: Run `npm install`
+            var installProcess = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd",
+                    Arguments = "/c npm install",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    WorkingDirectory = workingDir,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }
+            };
+
+            installProcess.Start();
+            installProcess.WaitForExit();
+
+            if (installProcess.ExitCode != 0)
+                throw new Exception("npm install failed.");
+
+            // Step 2: Run `npm start`
+            var startProcess = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "cmd",
+                    Arguments = "/c npm run start",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    WorkingDirectory = workingDir,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }
+            };
+
+            startProcess.Start();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to start web server: {ex.Message}");
+            return;
+        }
+        finally
+        {
+            Cursor = new Cursor(StandardCursorType.Arrow);
+        }
+    }
+
+    private async void CreateWebviewWindow(object? sender, RoutedEventArgs args)
+    {
+
+        var url = "http://127.0.0.1:5500/";
+        var isServerRunning = await IsServerRunningAsync(url);
+
+        if (!isServerRunning)
+            StartLocalSampleWebviewServer();
+
+        var widgetWindow = new WidgetWindow(url) { ShowInTaskbar = false };
         widgetWindow.Show(this);
     }
 

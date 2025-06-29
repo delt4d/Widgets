@@ -8,6 +8,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using widgets.Features.Timer;
 using widgets.Features.Widget.Components;
 using widgets.Features.Widget.Windows;
@@ -22,14 +23,12 @@ public partial class HomeWindow : Window
     {
         InitializeComponent();
 
-        Width = 250;
-        SizeToContent = SizeToContent.Height;
-        SystemDecorations = SystemDecorations.BorderOnly;
-
-        this.ApplyDefaultWindowProperties(prop =>
+        this.ApplyMainWidgetProperties();
+        this.ApplyDefaultAcrylicProperties();
+        this.ApplyDefaultWindowProperties(new()
         {
-            prop.ExtendClientAreaToDecorationsHint = true;
-            prop.Transparent = false;
+            ExtendClientAreaToDecorationsHint = true,
+            SystemDecorations = SystemDecorations.BorderOnly
         });
 
         _widgets.Add(new WidgetPanelControl(new WidgetPanelControlParams("Timer", CreateTimerWindow)));

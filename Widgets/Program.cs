@@ -1,6 +1,5 @@
 ﻿using System;
 using Avalonia;
-using widgets.Features.App;
 
 namespace widgets;
 

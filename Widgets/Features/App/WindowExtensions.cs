@@ -4,6 +4,13 @@ using Avalonia.Media;
 
 namespace widgets.Features.App;
 
+public class DefaultWindowPropertiesConfig
+{
+    public bool ExtendClientAreaToDecorationsHint { get; set; } = false;
+    public SystemDecorations SystemDecorations { get; set; } = SystemDecorations.Full;
+    public static DefaultWindowPropertiesConfig Default => new();
+}
+
 public static class WindowExtensions
 {
     public static void ApplyWidgetDefaultProperties(this Window @this)
@@ -12,62 +19,56 @@ public static class WindowExtensions
         @this.Height = 250;
     }
 
-    public static void ApplyDefaultWindowProperties(this Window @this, Action<ApplyDefaultWindowPropertiesConfig>? configure = null)
+    public static void ApplyMainWidgetProperties(this Window @this)
     {
-        var windowProperties = new ApplyDefaultWindowPropertiesConfig{ Transparent = true, ExtendClientAreaToDecorationsHint = false };
+        @this.Width = 250;
+        @this.SizeToContent = SizeToContent.Height;
+    }
 
-        if (configure is not null)
-            configure(windowProperties);
-
-        @this.ExtendClientAreaToDecorationsHint = windowProperties.ExtendClientAreaToDecorationsHint;
+    public static void ApplyDefaultWindowProperties(this Window @this, DefaultWindowPropertiesConfig? config = null)
+    {
+        config ??= DefaultWindowPropertiesConfig.Default;
+        @this.ExtendClientAreaToDecorationsHint = config.ExtendClientAreaToDecorationsHint;
+        @this.SystemDecorations = config.SystemDecorations;
         @this.FontFamily = "agave";
         @this.CanResize = false;
-        @this.Background = Brushes.Transparent;
-        @this.TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
+        @this.Background = Brushes.DimGray;
+    }
 
-        if (!windowProperties.Transparent)
-        {
-            @this.Background = Brushes.Gray;
-        }
+    public static void ApplyDefaultAcrylicProperties(this Window @this)
+    {
+        @this.Background = Brushes.Transparent;
+        @this.TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur, WindowTransparencyLevel.Mica];
 
         var acrylic = new ExperimentalAcrylicBorder
         {
             Material = new ExperimentalAcrylicMaterial
             {
                 BackgroundSource = AcrylicBackgroundSource.Digger,
-                MaterialOpacity = 0.1,
+                MaterialOpacity = 0.4, 
                 TintColor = Colors.Black,
-                TintOpacity = 1.0,
-                FallbackColor = Colors.Black
+                TintOpacity = 0.4, 
+                FallbackColor = Color.FromArgb(100, 0, 0, 0)
             }
         };
-
-        // Insert <ExperimentalAcrylicBorder />
-
+        
+        switch (@this.Content)
         {
-            if (@this.Content is Panel panel)
-            {
+            case Panel panel:
                 panel.Children.Insert(0, acrylic);
                 return;
-            }
-        }
-        {
-            if (@this.Content is Control existing)
-            {
+
+            case Control existing:
                 @this.Content = null;
-                var panel = new StackPanel { Margin = new Avalonia.Thickness(10) };
-                panel.Children.AddRange([acrylic, existing]);
-                @this.Content = panel;
+                var grid = new Grid(); 
+                grid.Children.Add(acrylic);
+                grid.Children.Add(existing);
+                @this.Content = grid;
                 return;
-            }
+
+            default:
+                throw new InvalidOperationException("Window must have a Panel or Control as Content.");
         }
-
-        throw new Exception("Window must have a Panel or Control.");
     }
-}
 
-public class ApplyDefaultWindowPropertiesConfig
-{
-    public required bool Transparent { get; set; }
-    public required bool ExtendClientAreaToDecorationsHint { get; set; }
 }

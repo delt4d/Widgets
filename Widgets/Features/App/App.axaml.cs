@@ -1,9 +1,8 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using widgets.Features.Main;
 
-namespace widgets;
+namespace widgets.Features.App;
 
 public partial class App : Application
 {

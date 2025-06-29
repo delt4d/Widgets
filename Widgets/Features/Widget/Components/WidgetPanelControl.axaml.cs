@@ -13,7 +13,7 @@ public partial class WidgetPanelControl : UserControl
 {
     public string Title
     {
-        get => WidgetText.Text?.ToString() ?? "";
+        get => WidgetText.Text?.ToString() ?? string.Empty;
         set => WidgetText.Text = value;
     }
 

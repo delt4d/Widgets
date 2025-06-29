@@ -23,10 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Features\Home\" />
-    <Folder Include="Features\Main\" />
-    <Folder Include="Features\Timer\" />
-    <Folder Include="Features\Widget\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -19,13 +19,13 @@ public partial class WidgetWindow : Window
         Initialize(null);
     }
 
-    private void Initialize(string? url)
+    private void Initialize(string? addressUrl)
     {
-        url ??= "https://google.com/";
+        addressUrl ??= "https://google.com/";
 
         WebViewComponent = new WebView
         {
-            Address = url,
+            Address = addressUrl,
             HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch,
             VerticalAlignment = Avalonia.Layout.VerticalAlignment.Stretch
         };

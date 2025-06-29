@@ -13,7 +13,6 @@ public partial class TimerWindow : Window
 
         _timerManager.Events = new TimerManagerEvents
         {
-            OnTimerUpdateEvent = UpdateTimer,
             OnTimerStartEvent = () =>
             {
                 PauseTimerButton.IsVisible = true;
@@ -25,21 +24,17 @@ public partial class TimerWindow : Window
                 StartTimerButton.Content = "Start Timer";
                 PauseTimerButton.Content = "Pause Timer";
             },
-            OnTimerPauseEvent = () =>
-            {
-                PauseTimerButton.Content = "Resume Timer";
-            },
-            OnTimerResumeEvent = () =>
-            {
-                PauseTimerButton.Content = "Pause Timer";
-            }
+            OnTimerUpdateEvent = UpdateTimer,
+            OnTimerPauseEvent = () => PauseTimerButton.Content = "Resume Timer",
+            OnTimerResumeEvent = () => PauseTimerButton.Content = "Pause Timer"
         };
 
-        this.ApplyDefaultWindowProperties(prop =>
+        this.ApplyDefaultWindowProperties(new()
         {
-            prop.ExtendClientAreaToDecorationsHint = true;
+            ExtendClientAreaToDecorationsHint = true
         });
         this.ApplyWidgetDefaultProperties();
+        this.ApplyDefaultAcrylicProperties();
     }
 
     public void StartTimer(object sender, RoutedEventArgs e)

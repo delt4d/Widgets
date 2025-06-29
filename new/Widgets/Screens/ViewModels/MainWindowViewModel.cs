@@ -1,4 +1,6 @@
-﻿namespace Widgets.ViewModels;
+﻿using Widgets.ViewModels;
+
+namespace Widgets.Screens.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {

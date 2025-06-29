@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace Widgets.Views;
+namespace Widgets.Screens.Views;
 
 public partial class MainWindow : Window
 {

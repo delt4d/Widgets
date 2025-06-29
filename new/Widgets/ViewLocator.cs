@@ -8,7 +8,7 @@ namespace Widgets;
 
 public class ViewLocator : IDataTemplate
 {
-    private static Dictionary<Type, Func<Control>> templates = new();
+    private static readonly Dictionary<Type, Func<Control>> templates = [];
 
     private static void Register<TViewModel, TView>() 
         where TView : Control, new()

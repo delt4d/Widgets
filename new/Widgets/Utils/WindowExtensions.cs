@@ -22,7 +22,6 @@ internal class WindowProperties
     public WindowSizes WindowSizes { get; set; } = WindowSizes.Default;
     public SystemDecorations SystemDecorations { get; set; } = SystemDecorations.Full;
     public bool ExtendClientArea { get; set; } = false;
-    public static WindowProperties Default() => new();
 }
 
 internal static class WindowExtensions

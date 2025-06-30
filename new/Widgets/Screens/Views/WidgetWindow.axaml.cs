@@ -14,6 +14,20 @@ public partial class WidgetWindow : Window
     {
         InitializeComponent();
 
+        if (DataContext is WidgetWindowViewModel vm)
+            Initialize(vm);
+        
+        throw new Exception($"Data Context needs to be {nameof(WidgetWindowViewModel)}");
+    }
+
+    public WidgetWindow(WidgetWindowViewModel vm)
+    {
+        InitializeComponent();
+        Initialize(vm);
+    }
+
+    private void Initialize(WidgetWindowViewModel vm)
+    {
         this.ApplyWindowProperties(new WindowProperties
         {
             ExtendClientArea = false,
@@ -22,17 +36,8 @@ public partial class WidgetWindow : Window
             WindowSizes = WindowSizes.Widget
         });
 
-        Initialize();
-    }
-
-    private void Initialize()
-    {
-        if (DataContext is WidgetWindowViewModel vm)
-        {
-            vm.PropertyChanged += (s, e) => LoadWebview(vm.AddressUrl);
-        }
-
-        throw new Exception($"Data Context needs to be {nameof(WidgetWindowViewModel)}");
+        LoadWebview(vm.AddressUrl);
+        vm.PropertyChanged += (s, e) => LoadWebview(vm.AddressUrl);
     }
 
     private void LoadWebview(string addressUrl)

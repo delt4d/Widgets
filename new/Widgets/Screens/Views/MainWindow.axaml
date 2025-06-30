@@ -21,7 +21,7 @@
 			<ListBox ItemsSource="{CompiledBinding Widgets}" SelectionMode="Single">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<cv:WidgetListItemControl />
+						<cv:WidgetItemView OnWidgetActivatedAction="CreateWebView" />
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 

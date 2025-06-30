@@ -28,7 +28,7 @@ internal static class WindowExtensions
 {
     public static void ApplyWindowProperties(this Window @this, WindowProperties properties)
     {
-        switch(properties.WindowStyles)
+        switch (properties.WindowStyles)
         {
             case WindowStyles.Acrylic:
                 @this.Background = Brushes.Transparent;
@@ -68,9 +68,10 @@ internal static class WindowExtensions
             case WindowStyles.Solid:
                 @this.Background = Brushes.DimGray;
                 break;
-        };
+        }
+        ;
 
-        switch(properties.WindowSizes)
+        switch (properties.WindowSizes)
         {
             case WindowSizes.Default:
                 @this.Width = 250;
@@ -80,11 +81,27 @@ internal static class WindowExtensions
                 @this.Width = 250;
                 @this.Height = 250;
                 break;
-        };
+        }
+        ;
 
         @this.ExtendClientAreaToDecorationsHint = properties.ExtendClientArea;
         @this.SystemDecorations = properties.SystemDecorations;
         @this.FontFamily = "Agave";
         @this.CanResize = false;
+    }
+
+    public static void PositionWindow(this Window @this)
+    {
+        if (@this.Screens.Primary is not { } primaryScreen)
+            return;
+
+        // Get the primary screen's working area
+        var screen = primaryScreen.WorkingArea;
+        var windowSize = Avalonia.PixelSize.FromSize(@this.ClientSize, primaryScreen.Scaling);
+
+        @this.Position = new Avalonia.PixelPoint(
+            screen.Width - windowSize.Width,
+            screen.Height - windowSize.Height
+        );
     }
 }

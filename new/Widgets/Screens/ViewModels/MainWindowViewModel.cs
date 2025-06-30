@@ -6,16 +6,16 @@ namespace Widgets.Screens.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public ObservableCollection<WidgetListItemControlViewModel> Widgets { get; } = [];
+    public ObservableCollection<WidgetItemViewModel> Widgets { get; } = [];
 
     public MainWindowViewModel()
     {
-        Widgets.Add(new WidgetListItemControlViewModel
+        Widgets.Add(new WidgetItemViewModel
         {
             Title = "Widget 1"
         });
 
-        Widgets.Add(new WidgetListItemControlViewModel
+        Widgets.Add(new WidgetItemViewModel
         {
             Title = "Widget 2"
         });

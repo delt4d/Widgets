@@ -1,6 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Widgets.Screens.ViewModels"
+        xmlns:cv="using:Widgets.Controls.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -15,6 +16,20 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<StackPanel Margin="10">
+		<StackPanel>
+			<ListBox ItemsSource="{CompiledBinding Widgets}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<cv:WidgetListItemControl></cv:WidgetListItemControl>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</StackPanel>
+		
+		<StackPanel MaxHeight="320">
+			<Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="10,12" Margin="0,10,0,0">Create New Widget</Button>
+		</StackPanel>
+	</StackPanel>
 
 </Window>

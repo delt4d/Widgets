@@ -1,5 +1,4 @@
-﻿using Avalonia;
-using Widgets.ViewModels;
+﻿using Widgets.ViewModels;
 
 namespace Widgets.Controls.ViewModels;
 

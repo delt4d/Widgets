@@ -6,5 +6,27 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Widgets.Controls.Views.WidgetListItemControl"
              x:DataType="vm:WidgetListItemControlViewModel">
-	<TextBlock Text="{CompiledBinding Title, FallbackValue=Nenhum Título}"></TextBlock>
+	
+	<DockPanel VerticalAlignment="Center">
+		<StackPanel
+            DockPanel.Dock="Right"
+            Orientation="Horizontal"
+            Spacing="4">
+			<Button Name="ActivateWidgetButton">
+				<Image
+                    Width="19"
+                    Height="19"
+                    Source="/Assets/Icons/play.png" />
+			</Button>
+
+			<Button>
+				<Image
+                    Width="21"
+                    Height="21"
+                    Source="/Assets/Icons/eng.png" />
+			</Button>
+		</StackPanel>
+
+		<TextBlock Text="{CompiledBinding Title, FallbackValue=No Name}" VerticalAlignment="Center" />
+	</DockPanel>
 </UserControl>

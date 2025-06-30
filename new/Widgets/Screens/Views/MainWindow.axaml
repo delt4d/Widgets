@@ -18,12 +18,14 @@
 
 	<StackPanel Margin="10">
 		<StackPanel>
-			<ListBox ItemsSource="{CompiledBinding Widgets}">
+			<ListBox ItemsSource="{CompiledBinding Widgets}" SelectionMode="Single">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<cv:WidgetListItemControl></cv:WidgetListItemControl>
+						<cv:WidgetListItemControl />
 					</DataTemplate>
 				</ListBox.ItemTemplate>
+
+				<ListBox.Background>Transparent</ListBox.Background>
 			</ListBox>
 		</StackPanel>
 		

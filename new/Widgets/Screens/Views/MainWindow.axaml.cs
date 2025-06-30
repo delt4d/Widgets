@@ -8,10 +8,10 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        Init();
+        Initialize();
     }
 
-    private void Init()
+    private void Initialize()
     {
         this.ApplyWindowProperties(new WindowProperties
         {

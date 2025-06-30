@@ -16,7 +16,7 @@ public partial class WidgetWindow : Window
 
         if (DataContext is WidgetWindowViewModel vm)
             Initialize(vm);
-        
+
         throw new Exception($"Data Context needs to be {nameof(WidgetWindowViewModel)}");
     }
 
@@ -35,25 +35,5 @@ public partial class WidgetWindow : Window
             WindowStyles = WindowStyles.Acrylic,
             WindowSizes = WindowSizes.Widget
         });
-
-        LoadWebview(vm.AddressUrl);
-        vm.PropertyChanged += (s, e) => LoadWebview(vm.AddressUrl);
-    }
-
-    private void LoadWebview(string addressUrl)
-    {
-        if (WebViewComponent is null)
-            MainGrid.Children.Clear();
-
-        WebViewComponent = new WebView
-        {
-            Address = addressUrl,
-            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch,
-            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Stretch
-        };
-        WebViewComponent.SetValue(Grid.RowProperty, 0);
-        WebViewComponent.SetValue(Grid.ColumnProperty, 0);
-
-        MainGrid.Children.Add(WebViewComponent);
     }
 }

@@ -18,15 +18,13 @@
 
 	<StackPanel Margin="10">
 		<StackPanel>
-			<ListBox ItemsSource="{CompiledBinding Widgets}" SelectionMode="Single">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<cv:WidgetItemView OnWidgetActivatedAction="CreateWebView" />
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-
-				<ListBox.Background>Transparent</ListBox.Background>
-			</ListBox>
+			<ItemsControl ItemsSource="{CompiledBinding Widgets}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <cv:WidgetItemView />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 		</StackPanel>
 		
 		<StackPanel MaxHeight="320">

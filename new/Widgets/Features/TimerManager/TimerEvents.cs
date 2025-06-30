@@ -1,12 +1,6 @@
 ﻿namespace Widgets.Features;
 
-public delegate void OnTimerUpdate(Timer Time);
-public delegate void OnTimerStart();
-public delegate void OnTimerStop();
-public delegate void OnPause();
-public delegate void OnResume();
-
-public class TimerManagerEvents
+public class TimerEvents
 {
     public OnTimerUpdate? OnTimerUpdateEvent { get; set; }
     public OnTimerStart? OnTimerStartEvent { get; set; }
@@ -14,3 +8,9 @@ public class TimerManagerEvents
     public OnPause? OnTimerPauseEvent { get; set; }
     public OnResume? OnTimerResumeEvent { get; set; }
 }
+
+public delegate void OnTimerUpdate(Timer Time);
+public delegate void OnTimerStart();
+public delegate void OnTimerStop();
+public delegate void OnPause();
+public delegate void OnResume();

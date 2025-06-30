@@ -1,7 +1,10 @@
-﻿using Widgets.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Widgets.ViewModels;
 
 namespace Widgets.Screens.ViewModels;
 
-public class WidgetWindowViewModel : ViewModelBase
+public partial class WidgetWindowViewModel : ViewModelBase
 {
+    [ObservableProperty]
+    private string addressUrl = "https://google.com/";
 }

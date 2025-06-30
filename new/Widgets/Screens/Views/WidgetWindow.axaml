@@ -13,5 +13,5 @@
 	    <vm:WidgetWindowViewModel />
     </Design.DataContext>
 
-	Welcome to Avalonia!
+	<Grid x:Name="MainGrid"></Grid>
 </Window>

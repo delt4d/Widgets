@@ -16,6 +16,12 @@ public partial class MainWindow : Window
         Initialize();
 
         DataContextChanged += OnDataContextChanged;
+
+        // TODO: REMOVE
+        new TimerWidgetWindow()
+        {
+            DataContext = new TimerWidgetWindowViewModel()    
+        }.Show();
     }
 
     private void OnDataContextChanged(object? sender, EventArgs e)

@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -8,8 +9,7 @@ namespace Widgets.Features;
 public class WebServerLauncher : BaseWidgetLauncher
 {
     public required string WebServerUrl { get; set; }
-    public required Window MainWindow { get; set; }
-    public required Grid MainGrid { get; set; }
+    public required Func<Window> WidgetWindow { get; set; }
     public override string Type => "webserver";
 
     public override Task ExecuteAsync(CancellationToken? cancellationToken = null)
@@ -24,8 +24,10 @@ public class WebServerLauncher : BaseWidgetLauncher
         WebViewComponent.SetValue(Grid.RowProperty, 0);
         WebViewComponent.SetValue(Grid.ColumnProperty, 0);
 
-        MainGrid.Children.Add(WebViewComponent);
-        MainWindow.Show();
+        var widgetWindow = WidgetWindow();
+        var mainGrid = widgetWindow.FindControl<Grid>("MainGrid");
+        mainGrid?.Children.Add(WebViewComponent);
+        widgetWindow.Show();
 
         return Task.CompletedTask;
     }

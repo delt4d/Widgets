@@ -13,20 +13,10 @@ public partial class WidgetWindow : Window
     public WidgetWindow()
     {
         InitializeComponent();
-
-        if (DataContext is WidgetWindowViewModel vm)
-            Initialize(vm);
-
-        throw new Exception($"Data Context needs to be {nameof(WidgetWindowViewModel)}");
+        Initialize();
     }
 
-    public WidgetWindow(WidgetWindowViewModel vm)
-    {
-        InitializeComponent();
-        Initialize(vm);
-    }
-
-    private void Initialize(WidgetWindowViewModel vm)
+    private void Initialize()
     {
         this.ApplyWindowProperties(new WindowProperties
         {

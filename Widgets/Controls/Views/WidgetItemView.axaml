@@ -16,14 +16,14 @@
 				<Image
                     Width="19"
                     Height="19"
-                    Source="/Assets/Icons/play.png" />
+                    Source="/Resources/Icons/play.png" />
 			</Button>
 
 			<Button>
 				<Image
                     Width="21"
                     Height="21"
-                    Source="/Assets/Icons/eng.png" />
+                    Source="/Resources/Icons/eng.png" />
 			</Button>
 		</StackPanel>
 

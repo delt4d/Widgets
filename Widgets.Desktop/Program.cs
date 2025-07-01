@@ -34,6 +34,6 @@ class Program
             {
                 manager.AddFontCollection(
                     new EmbeddedFontCollection(new Uri("fonts:App", UriKind.Absolute),
-                    new Uri("avares://Widgets/Resources")));
+                    new Uri("avares://Widgets/Resources/Fonts")));
             });
 }

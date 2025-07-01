@@ -1,7 +1,5 @@
 using Avalonia.Controls;
-using System;
 using WebViewControl;
-using Widgets.Screens.ViewModels;
 using Widgets.Utils;
 
 namespace Widgets.Screens.Views;

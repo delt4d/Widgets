@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
+using Widgets.Controls.ViewModels;
+using Widgets.Controls.Views;
+using Widgets.Screens.ViewModels;
+using Widgets.Screens.Views;
 using Widgets.ViewModels;
 
 namespace Widgets;
@@ -18,23 +22,20 @@ public class ViewLocator : IDataTemplate
 
     static ViewLocator()
     {
-        // Register<SomethingViewModel, SomethingView>();
+        Register<WidgetItemViewModel, WidgetItemView>();
+        Register<WidgetWindowViewModel, WidgetWindow>();
+        Register<TimerWidgetWindowViewModel, TimerWidgetWindow>();
     }
 
     public Control? Build(object? param)
     {
         if (param is null)
             return null;
-        
-        var name = param.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-        var type = Type.GetType(name);
 
-        if (type != null)
-        {
-            return (Control)Activator.CreateInstance(type)!;
-        }
-        
-        return new TextBlock { Text = "Not Found: " + name };
+        if (templates.TryGetValue(param.GetType(), out var template))
+            return template();
+            
+        return null;
     }
 
     public bool Match(object? data)

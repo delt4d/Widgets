@@ -1,4 +1,3 @@
-using System;
 using Avalonia.Controls;
 using Widgets.Screens.ViewModels;
 using Widgets.Utils;

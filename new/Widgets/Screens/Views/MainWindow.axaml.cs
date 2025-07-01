@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 using Widgets.Controls.ViewModels;
 using Widgets.Features;
@@ -35,6 +36,7 @@ public partial class MainWindow : Window
             WidgetWindow = () =>
             {
                 widgetWindow ??= GetWidgetWindow();
+                widgetWindow.Closed += (s,e) => widgetWindow = null;
                 return widgetWindow;
             },
             Title = "Widget 2 | SW",
@@ -45,7 +47,7 @@ public partial class MainWindow : Window
         vm.Widgets.Add(widget2);
     }
 
-    private WidgetWindow GetWidgetWindow()
+    private  WidgetWindow GetWidgetWindow()
     {
         return new WidgetWindow()
         {
@@ -53,7 +55,7 @@ public partial class MainWindow : Window
         };
     }
 
-    private void Initialize()
+    private async void Initialize()
     {
         Opened += OnWindowOpened;
 
@@ -62,6 +64,8 @@ public partial class MainWindow : Window
             ExtendClientArea = true,
             SystemDecorations = SystemDecorations.BorderOnly
         });
+
+        await NodejsServerUtils.EnsureServerRunningAsync();
     }
 
     private void OnWindowOpened(object? sender, EventArgs e) => this.PositionWindow();

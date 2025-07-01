@@ -13,6 +13,13 @@ public partial class TimerWidgetWindow : Window
         Initialize();
     }
 
+    public TimerWidgetWindow(TimerWidgetWindowViewModel vm)
+    {
+        InitializeComponent();
+        Initialize();
+        DataContext = vm;
+    }
+
     private void Initialize()
     {
         this.ApplyWindowProperties(new WindowProperties

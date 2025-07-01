@@ -17,7 +17,9 @@
     </Design.DataContext>
 
 	<StackPanel Margin="10">
-		<StackPanel>
+		<ScrollViewer 
+            MaxHeight="100"
+            VerticalScrollBarVisibility="Hidden">
 			<ItemsControl ItemsSource="{CompiledBinding Widgets}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -25,10 +27,16 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-		</StackPanel>
+		</ScrollViewer>
 		
 		<StackPanel MaxHeight="320">
-			<Button HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="10,12" Margin="0,10,0,0">Create New Widget</Button>
+			<Button 
+                Content="Create New Widget"
+                Command="{CompiledBinding CreateNewWidgetCommand}"
+                HorizontalAlignment="Stretch" 
+                HorizontalContentAlignment="Center" 
+                Padding="10,12" 
+                Margin="0,10,0,0" />
 		</StackPanel>
 	</StackPanel>
 

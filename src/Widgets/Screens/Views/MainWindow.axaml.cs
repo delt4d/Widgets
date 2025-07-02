@@ -7,24 +7,23 @@ using Widgets.Utils;
 
 namespace Widgets.Screens.Views;
 
-public partial class MainWindow : Window
+public partial class MainWindow : Window<MainWindowViewModel>
 {
     public MainWindow()
     {
         InitializeComponent();
         Initialize();
-
-        DataContextChanged += OnDataContextChanged;
     }
 
-    private void OnDataContextChanged(object? sender, EventArgs e)
+    public override void OnViewModelLoaded()
     {
-        if (DataContext is MainWindowViewModel vm)
-        {
-            vm.Widgets.Clear();
+        base.OnViewModelLoaded();
 
-            foreach (var widget in SampleWidgetsHelper.GetSampleWidgets())
-                vm.Widgets.Add(widget);
+        ViewModel.Widgets.Clear();
+
+        foreach (var widget in SampleWidgetsHelper.GetSampleWidgets())
+        {
+            ViewModel.Widgets.Add(widget);
         }
     }
 

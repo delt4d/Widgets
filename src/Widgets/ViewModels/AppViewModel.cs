@@ -1,13 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System;
 using Widgets.Screens.Views;
 
 namespace Widgets.ViewModels;
 
 public partial class AppViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private bool shouldExit;
+    public EventHandler? Exit { get; set; }
 
     public required MainWindow MainWindow { get; set; }
 
@@ -19,9 +19,9 @@ public partial class AppViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public void Exit()
+    public void ExitCommand()
     {
-        ShouldExit = true;
+        Exit?.Invoke(this, EventArgs.Empty);
     }
 }
 

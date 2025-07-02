@@ -13,7 +13,7 @@
 				ToolTipText="Widgets">
 				<TrayIcon.Menu>
 					<NativeMenu>
-						<NativeMenuItem Command="{CompiledBinding Exit}" Header="Exit" />
+						<NativeMenuItem Command="{CompiledBinding ExitCommand}" Header="Exit" />
 					</NativeMenu>
 				</TrayIcon.Menu>
 			</TrayIcon>

@@ -30,12 +30,11 @@ public partial class App : Application
                 {
                     DataContext = new MainWindowViewModel(),
                     ClosingBehavior = Avalonia.Controls.WindowClosingBehavior.OwnerWindowOnly
-                }
-            };
-            appViewModel.PropertyChanged += (s, e) =>
-            {
-                if (appViewModel.ShouldExit)
+                },
+                Exit = (s,e) =>
+                {
                     desktop.Shutdown(0);
+                }
             };
             appViewModel.MainWindow.Closing += (s,e) =>
             {
@@ -44,6 +43,8 @@ public partial class App : Application
             };
 
             DataContext = appViewModel;
+
+            desktop.ShutdownMode = Avalonia.Controls.ShutdownMode.OnExplicitShutdown;
             desktop.MainWindow = appViewModel.MainWindow;
         }
 

@@ -1,10 +1,11 @@
 using Avalonia.Controls;
 using WebViewControl;
+using Widgets.Screens.ViewModels;
 using Widgets.Utils;
 
 namespace Widgets.Screens.Views;
 
-public partial class WidgetWindow : Window
+public partial class WidgetWindow : Window<WidgetWindowViewModel>
 {
     public WebView? WebViewComponent { get; set; }
 

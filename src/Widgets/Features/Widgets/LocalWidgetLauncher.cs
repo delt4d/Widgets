@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 
-namespace Widgets.Features.Widgets;
+namespace Widgets.Features;
 
 public class LocalWidgetLauncher : BaseWidgetLauncher
 {

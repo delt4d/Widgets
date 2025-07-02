@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
 using Widgets.Controls.ViewModels;
-using Widgets.Features.Widgets;
+using Widgets.Features;
 using Widgets.Screens.Views;
 using Widgets.ViewModels;
 

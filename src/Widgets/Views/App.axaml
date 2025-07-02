@@ -11,6 +11,11 @@
 				Command="{CompiledBinding ShowMainWindow}"
 				Icon="/Resources/avalonia-logo.ico"
 				ToolTipText="Widgets">
+				<TrayIcon.Menu>
+					<NativeMenu>
+						<NativeMenuItem Command="{CompiledBinding Exit}" Header="Exit" />
+					</NativeMenu>
+				</TrayIcon.Menu>
 			</TrayIcon>
 		</TrayIcons>
 	</TrayIcon.Icons>

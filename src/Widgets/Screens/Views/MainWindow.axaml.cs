@@ -19,12 +19,13 @@ public partial class MainWindow : Window
 
     private void OnDataContextChanged(object? sender, EventArgs e)
     {
-        if (DataContext is not MainWindowViewModel vm)
-            return;
+        if (DataContext is MainWindowViewModel vm)
+        {
+            vm.Widgets.Clear();
 
-        vm.Widgets.Clear();
-        foreach (var widget in SampleWidgetsHelper.GetSampleWidgets())
-            vm.Widgets.Add(widget);
+            foreach (var widget in SampleWidgetsHelper.GetSampleWidgets())
+                vm.Widgets.Add(widget);
+        }
     }
 
     private async void Initialize()

@@ -1,10 +1,20 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:vm="using:Widgets.ViewModels"
              x:Class="Widgets.Views.App"
+			 x:DataType="vm:AppViewModel"
              xmlns:local="using:Widgets"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
-
+             RequestedThemeVariant="Dark">
+	<TrayIcon.Icons>
+		<TrayIcons>
+			<TrayIcon 
+				Command="{CompiledBinding ShowMainWindow}"
+				Icon="/Resources/avalonia-logo.ico"
+				ToolTipText="Widgets">
+			</TrayIcon>
+		</TrayIcons>
+	</TrayIcon.Icons>
+	
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>

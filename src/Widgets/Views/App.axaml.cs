@@ -1,10 +1,11 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
-using System.Linq;
 using Avalonia.Markup.Xaml;
+using System.Linq;
 using Widgets.Screens.ViewModels;
 using Widgets.Screens.Views;
+using Widgets.ViewModels;
 
 namespace Widgets.Views;
 
@@ -22,10 +23,25 @@ public partial class App : Application
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow()
+
+            var mainWindow = new MainWindow()
             {
                 DataContext = new MainWindowViewModel(),
+                ClosingBehavior = Avalonia.Controls.WindowClosingBehavior.OwnerWindowOnly
             };
+
+            mainWindow.Closing += (_, e) =>
+            {
+                e.Cancel = true;
+                mainWindow.Hide();
+            };
+
+            DataContext = new AppViewModel()
+            {
+                MainWindow = mainWindow
+            };
+
+            desktop.MainWindow = mainWindow;
         }
 
         base.OnFrameworkInitializationCompleted();

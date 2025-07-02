@@ -74,8 +74,8 @@ internal static class WindowExtensions
         switch (properties.WindowSizes)
         {
             case WindowSizes.Default:
-                @this.Width = 250;
-                @this.SizeToContent = SizeToContent.Height;
+                @this.Width = 520;
+                @this.Height = 412;
                 break;
             case WindowSizes.Widget:
                 @this.Width = 250;
@@ -100,8 +100,8 @@ internal static class WindowExtensions
         var windowSize = Avalonia.PixelSize.FromSize(@this.ClientSize, primaryScreen.Scaling);
 
         @this.Position = new Avalonia.PixelPoint(
-            screen.Width - windowSize.Width,
-            screen.Height - windowSize.Height
+            screen.Width / 2 - windowSize.Width / 2,
+            screen.Height / 2 - windowSize.Height / 2
         );
     }
 }

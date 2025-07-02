@@ -1,28 +1,15 @@
-using System;
-using Avalonia.Controls;
+﻿using System.Collections.Generic;
 using Widgets.Controls.ViewModels;
 using Widgets.Features;
-using Widgets.Features.Widgets;
 using Widgets.Screens.ViewModels;
-using Widgets.Utils;
+using Widgets.Screens.Views;
 
-namespace Widgets.Screens.Views;
+namespace Widgets.Helpers;
 
-public partial class MainWindow : Window
+internal static class SampleWidgetsHelper
 {
-    public MainWindow()
+    public static List<WidgetItemViewModel> GetSampleWidgets()
     {
-        InitializeComponent();
-        Initialize();
-
-        DataContextChanged += OnDataContextChanged;
-    }
-
-    private void OnDataContextChanged(object? sender, EventArgs e)
-    {
-        if (DataContext is not MainWindowViewModel vm)
-            return;
-
         var widget1 = new WidgetItemViewModel(new WebServerLauncher
         {
             WidgetWindow = GetWidgetWindow,
@@ -49,31 +36,14 @@ public partial class MainWindow : Window
             Title = "Local Timer Widget"
         });
 
-        vm.Widgets.Add(widget1);
-        vm.Widgets.Add(widget2);
-        vm.Widgets.Add(widget3);
+        return [widget1, widget2, widget3];
     }
 
-    private WidgetWindow GetWidgetWindow()
+    private static WidgetWindow GetWidgetWindow()
     {
         return new WidgetWindow()
         {
             ShowInTaskbar = false
         };
     }
-
-    private async void Initialize()
-    {
-        Opened += OnWindowOpened;
-
-        this.ApplyWindowProperties(new WindowProperties
-        {
-            ExtendClientArea = true,
-            SystemDecorations = SystemDecorations.BorderOnly
-        });
-
-        await NodejsServerUtils.EnsureServerRunningAsync();
-    }
-
-    private void OnWindowOpened(object? sender, EventArgs e) => this.PositionWindow();
 }

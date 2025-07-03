@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Media;
 using System;
-using Widgets.Helpers;
 using Widgets.Screens.ViewModels;
 using Widgets.Utils;
 
@@ -13,18 +12,6 @@ public partial class MainWindow : Window<MainWindowViewModel>
     {
         InitializeComponent();
         Initialize();
-    }
-
-    public override void OnViewModelLoaded()
-    {
-        base.OnViewModelLoaded();
-
-        ViewModel.Widgets.Clear();
-
-        foreach (var widget in SampleWidgetsHelper.GetSampleWidgets())
-        {
-            ViewModel.Widgets.Add(widget);
-        }
     }
 
     private async void Initialize()

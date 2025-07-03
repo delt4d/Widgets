@@ -1,16 +1,22 @@
+using Avalonia.Controls;
+using Newtonsoft.Json;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Avalonia.Controls;
 using WebViewControl;
+using Widgets.Screens.Views;
 
 namespace Widgets.Features;
 
 public class WebServerLauncher : BaseWidgetLauncher
 {
+    [JsonProperty]
     public required string WebServerUrl { get; set; }
-    public required Func<Window> WidgetWindow { get; set; }
+    
+    [JsonProperty]
     public override string Type => "webserver";
+
+    public required Func<Window>? WidgetWindow { get; set; }
 
     public override Task ExecuteAsync(CancellationToken? cancellationToken = null)
     {
@@ -24,7 +30,7 @@ public class WebServerLauncher : BaseWidgetLauncher
         WebViewComponent.SetValue(Grid.RowProperty, 0);
         WebViewComponent.SetValue(Grid.ColumnProperty, 0);
 
-        var widgetWindow = WidgetWindow();
+        var widgetWindow = WidgetWindow?.Invoke() ?? new WidgetWindow();
         var mainGrid = widgetWindow.FindControl<Grid>("MainGrid");
         mainGrid?.Children.Add(WebViewComponent);
         widgetWindow.Show();

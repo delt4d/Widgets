@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -7,7 +8,10 @@ namespace Widgets.Features;
 
 public class CommandLauncher : BaseWidgetLauncher
 {
+    [JsonProperty]
     public required string Command { get; set; }
+    
+    [JsonProperty]
     public override string Type => "command";
 
     public override async Task ExecuteAsync(CancellationToken? cancellationToken = null)

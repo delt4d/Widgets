@@ -1,10 +1,13 @@
+using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Widgets.Features;
 
+[JsonObject(MemberSerialization.OptIn)]
 public abstract class BaseWidgetLauncher
 {
+    [JsonProperty]
     public required string Title { get; set; }
     public abstract string Type { get; }
     public abstract Task ExecuteAsync(CancellationToken? cancellationToken = null);

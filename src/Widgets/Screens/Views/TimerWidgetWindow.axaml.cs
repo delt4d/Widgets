@@ -5,7 +5,7 @@ namespace Widgets.Screens.Views;
 
 public partial class TimerWidgetWindow : Window<TimerWidgetWindowViewModel>
 {
-    public TimerWidgetWindow()
+    public TimerWidgetWindow() : base(new TimerWidgetWindowViewModel())
     {
         InitializeComponent();
         Initialize();

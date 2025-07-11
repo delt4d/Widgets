@@ -51,7 +51,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void CreateNewWidget()
     {
-        Widgets.Insert(0, new WidgetItemViewModel(new LocalWidgetLauncher
+        Widgets.Insert(0, new WidgetItemViewModel(new TimerWidgetLauncher
         {
             Title = $"Created Widget {CreatedWidgetsCount+1}"
         }));

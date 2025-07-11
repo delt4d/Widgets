@@ -21,12 +21,12 @@ internal static class SampleWidgetsHelper
             Title = "Webview Widget 2 | Same Window"
         });
 
-        var widget3 = new WidgetItemViewModel(new LocalWidgetLauncher
+        var widget3 = new WidgetItemViewModel(new TimerWidgetLauncher
         {
             Title = "Local Timer Widget"
         });
 
-        var widget4 = new WidgetItemViewModel(new LocalWidgetLauncher
+        var widget4 = new WidgetItemViewModel(new TimerWidgetLauncher
         {
             ReuseWindow = true,
             Title = "Local Timer Widget | Same Window"

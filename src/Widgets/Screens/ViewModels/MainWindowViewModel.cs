@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Widgets.Controls.ViewModels;
 using Widgets.Features;
-using Widgets.Screens.Views;
+using Widgets.Helpers;
 using Widgets.Utils;
 using Widgets.ViewModels;
 
@@ -12,13 +13,9 @@ namespace Widgets.Screens.ViewModels;
 
 public class WidgetObservableCollection : ObservableCollection<WidgetItemViewModel>
 {
-    public IEnumerable<BaseWidgetLauncher> GetItemsWidgetLauncher()
-    {
-        foreach (var item in Items)
-        {
-            yield return item.WidgetLauncher;
-        }
-    }
+    public IEnumerable<IWidgetLauncher> GetItemsToSave() => Items
+        .Where(x => x.SaveToFile)
+        .Select(x => x.WidgetLauncher);
 }
 
 public partial class MainWindowViewModel : ViewModelBase
@@ -34,14 +31,20 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private async void OnCollectionChanged(object? sender, EventArgs e)
     {
-        await LauncherStorage.SaveAsync(Widgets.GetItemsWidgetLauncher());
+        await LauncherStorage.SaveAsync(Widgets.GetItemsToSave());
     }
 
     private async void LoadWidgets()
     {
-        foreach (var item in await LauncherStorage.LoadAsync())
+        await foreach (var item in LauncherStorage.LoadAsync())
         {
             Widgets.Add(new WidgetItemViewModel(item));
+        }
+
+        foreach (var vm in SampleWidgetsHelper.GetSampleWidgets())
+        {
+            vm.SaveToFile = false;
+            Widgets.Add(vm);
         }
     }
 
@@ -50,7 +53,6 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         Widgets.Insert(0, new WidgetItemViewModel(new LocalWidgetLauncher
         {
-            TimerWidgetWindow = () => new TimerWidgetWindow(new TimerWidgetWindowViewModel()),
             Title = $"Created Widget {CreatedWidgetsCount+1}"
         }));
     }

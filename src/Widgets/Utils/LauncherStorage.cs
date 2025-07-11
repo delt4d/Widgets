@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
-using Widgets.Converters;
 using Widgets.Features;
 
 namespace Widgets.Utils;
@@ -23,23 +23,30 @@ public static class LauncherStorage
         return DevJsonPath;
     }
 
-    public static async Task<List<BaseWidgetLauncher>> LoadAsync()
+    public static async IAsyncEnumerable<IWidgetLauncher> LoadAsync()
     {
         var path = GetJsonPath();
-        
+
         if (!File.Exists(path))
-            return [];
+            yield break;
 
         var json = await File.ReadAllTextAsync(path);
-        return JsonConvert.DeserializeObject<List<BaseWidgetLauncher>>(json, new LauncherItemConverter())
-            ?? throw new Exception("Unable to deserialize json");
+        var items = JsonConvert.DeserializeObject<List<WidgetData>>(json) ?? [];
+
+        foreach (var data in items)
+        {
+            var launcher = WidgetLauncherBase
+                .CreateLauncher(data.Name)?
+                .SetData(data) ?? throw new Exception($"No launcher registered for {data.Name}");
+
+            yield return launcher;
+        }
     }
 
-    public static async Task SaveAsync(IEnumerable<BaseWidgetLauncher> items)
+    public static async Task SaveAsync(IEnumerable<IWidgetLauncher> items)
     {
         var path = GetJsonPath();
-        var json = JsonConvert.SerializeObject(items, Formatting.Indented);
-
+        var json = JsonConvert.SerializeObject(items.Select(x => x.GetData()), Formatting.Indented);
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         await File.WriteAllTextAsync(path, json);
     }

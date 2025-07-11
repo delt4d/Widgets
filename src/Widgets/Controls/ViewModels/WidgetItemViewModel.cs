@@ -6,12 +6,13 @@ namespace Widgets.Controls.ViewModels;
 public class WidgetItemViewModel : ViewModelBase
 {
     public string Title => WidgetLauncher.Title;
-    public BaseWidgetLauncher WidgetLauncher { get; set; }
+    public bool SaveToFile { get; set; } = true;
+    public IWidgetLauncher WidgetLauncher { get; set; }
     public WidgetItemViewModel()
     {
-        WidgetLauncher = VoidWidgetLauncher.Default;
+        WidgetLauncher = WidgetLauncherBase.Default;
     }
-    public WidgetItemViewModel(BaseWidgetLauncher launcher)
+    public WidgetItemViewModel(IWidgetLauncher launcher)
     {
         WidgetLauncher = launcher;
     }

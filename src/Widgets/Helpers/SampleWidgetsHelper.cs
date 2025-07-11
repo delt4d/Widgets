@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using Widgets.Controls.ViewModels;
 using Widgets.Features;
-using Widgets.Screens.ViewModels;
-using Widgets.Screens.Views;
 
 namespace Widgets.Helpers;
 
@@ -10,40 +8,30 @@ internal static class SampleWidgetsHelper
 {
     public static List<WidgetItemViewModel> GetSampleWidgets()
     {
-        var widget1 = new WidgetItemViewModel(new WebServerLauncher
+        var widget1 = new WidgetItemViewModel(new WebserverWidgetLauncher
         {
-            WidgetWindow = GetWidgetWindow,
             Title = "Webview Widget 1",
-            WebServerUrl = "http://localhost:5500/"
+            Url = "http://localhost:5500/"
         });
 
-        WidgetWindow? widgetWindow = null;
-        var widget2 = new WidgetItemViewModel(new WebServerLauncher
+        var widget2 = new WidgetItemViewModel(new WebserverWidgetLauncher
         {
-            WidgetWindow = () =>
-            {
-                widgetWindow ??= GetWidgetWindow();
-                widgetWindow.Closed += (s, e) => widgetWindow = null;
-                return widgetWindow;
-            },
-            Title = "Webview Widget 2 | SW",
-            WebServerUrl = "http://localhost:5500/"
+            ReuseWindow = true,
+            Url = "http://localhost:5500/",
+            Title = "Webview Widget 2 | Same Window"
         });
 
         var widget3 = new WidgetItemViewModel(new LocalWidgetLauncher
         {
-            TimerWidgetWindow = () => new TimerWidgetWindow(new TimerWidgetWindowViewModel()),
             Title = "Local Timer Widget"
         });
 
-        return [widget1, widget2, widget3];
-    }
-
-    private static WidgetWindow GetWidgetWindow()
-    {
-        return new WidgetWindow()
+        var widget4 = new WidgetItemViewModel(new LocalWidgetLauncher
         {
-            ShowInTaskbar = false
-        };
+            ReuseWindow = true,
+            Title = "Local Timer Widget | Same Window"
+        });
+
+        return [widget1, widget2, widget3, widget4];
     }
 }

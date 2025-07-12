@@ -1,34 +1,52 @@
-using System;
+using Avalonia.Controls;
 using System.Threading;
 using System.Threading.Tasks;
-using Avalonia.Controls;
 using WebViewControl;
+using Widgets.Features.Attributes;
+using Widgets.Screens.Views;
 
 namespace Widgets.Features;
 
-public class WebServerLauncher : BaseWidgetLauncher
+[WidgetLauncher("Webserver")]
+public class WebserverWidgetLauncher : WidgetLauncherBase
 {
-    public required string WebServerUrl { get; set; }
-    public required Func<Window> WidgetWindow { get; set; }
-    public override string Type => "webserver";
+    public WidgetWindow? Window { get; private set; }
+
+    [WidgetArgs("Url")]
+    public string Url { get; set; } = "https://google.com";
+
+    [WidgetArgs("ReuseWindow")]
+    public bool ReuseWindow { get; set; } = false;
 
     public override Task ExecuteAsync(CancellationToken? cancellationToken = null)
     {
         var WebViewComponent = new WebView
         {
-            Address = WebServerUrl,
+            Address = Url,
             HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch,
             VerticalAlignment = Avalonia.Layout.VerticalAlignment.Stretch
         };
-        
+
         WebViewComponent.SetValue(Grid.RowProperty, 0);
         WebViewComponent.SetValue(Grid.ColumnProperty, 0);
 
-        var widgetWindow = WidgetWindow();
+        var widgetWindow = GetWidgetWindow();
         var mainGrid = widgetWindow.FindControl<Grid>("MainGrid");
         mainGrid?.Children.Add(WebViewComponent);
+
         widgetWindow.Show();
 
         return Task.CompletedTask;
+    }
+
+    private WidgetWindow GetWidgetWindow()
+    {
+        if (Window is not null && ReuseWindow)
+            return Window;
+
+        Window = new WidgetWindow();
+        Window.Closed += (_, _) => Window = null;
+
+        return Window;
     }
 }

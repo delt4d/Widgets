@@ -1,30 +1,17 @@
 using Avalonia.Controls;
 using Avalonia.Media;
 using System;
-using Widgets.Helpers;
 using Widgets.Screens.ViewModels;
 using Widgets.Utils;
 
 namespace Widgets.Screens.Views;
 
-public partial class MainWindow : Window
+public partial class MainWindow : Window<MainWindowViewModel>
 {
     public MainWindow()
     {
         InitializeComponent();
         Initialize();
-
-        DataContextChanged += OnDataContextChanged;
-    }
-
-    private void OnDataContextChanged(object? sender, EventArgs e)
-    {
-        if (DataContext is not MainWindowViewModel vm)
-            return;
-
-        vm.Widgets.Clear();
-        foreach (var widget in SampleWidgetsHelper.GetSampleWidgets())
-            vm.Widgets.Add(widget);
     }
 
     private async void Initialize()

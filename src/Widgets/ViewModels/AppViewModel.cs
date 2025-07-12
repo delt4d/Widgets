@@ -1,21 +1,27 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System;
 using Widgets.Screens.Views;
 
 namespace Widgets.ViewModels;
 
-public partial class AppViewModel
+public partial class AppViewModel : ViewModelBase
 {
-    public required MainWindow MainWindow { get; set; }
-    public ICommand ShowMainWindow { get; set; }
+    public EventHandler? Exit { get; set; }
 
-    public AppViewModel()
+    public required MainWindow MainWindow { get; set; }
+
+    [RelayCommand]
+    public void ShowMainWindow()
     {
-        ShowMainWindow = new RelayCommand(() =>
-        {
-            MainWindow.Show();
-            MainWindow.Activate();
-        });
+        MainWindow.Show();
+        MainWindow.Activate();
+    }
+
+    [RelayCommand]
+    public void ExitCommand()
+    {
+        Exit?.Invoke(this, EventArgs.Empty);
     }
 }
 

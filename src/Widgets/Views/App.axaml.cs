@@ -24,24 +24,28 @@ public partial class App : Application
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
 
-            var mainWindow = new MainWindow()
+            var appViewModel = new AppViewModel()
             {
-                DataContext = new MainWindowViewModel(),
-                ClosingBehavior = Avalonia.Controls.WindowClosingBehavior.OwnerWindowOnly
+                MainWindow = new MainWindow()
+                {
+                    DataContext = new MainWindowViewModel(),
+                    ClosingBehavior = Avalonia.Controls.WindowClosingBehavior.OwnerWindowOnly
+                },
+                Exit = (s,e) =>
+                {
+                    desktop.Shutdown(0);
+                }
             };
-
-            mainWindow.Closing += (_, e) =>
+            appViewModel.MainWindow.Closing += (s,e) =>
             {
                 e.Cancel = true;
-                mainWindow.Hide();
+                appViewModel.MainWindow.Hide();
             };
 
-            DataContext = new AppViewModel()
-            {
-                MainWindow = mainWindow
-            };
+            DataContext = appViewModel;
 
-            desktop.MainWindow = mainWindow;
+            desktop.ShutdownMode = Avalonia.Controls.ShutdownMode.OnExplicitShutdown;
+            desktop.MainWindow = appViewModel.MainWindow;
         }
 
         base.OnFrameworkInitializationCompleted();

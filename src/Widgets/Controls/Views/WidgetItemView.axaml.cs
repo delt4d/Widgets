@@ -1,10 +1,11 @@
-using Avalonia.Controls;
+using System;
 using Avalonia.Interactivity;
 using Widgets.Controls.ViewModels;
+using Widgets.Utils;
 
 namespace Widgets.Controls.Views;
 
-public partial class WidgetItemView : UserControl
+public partial class WidgetItemView : UserControl<WidgetItemViewModel>
 {
     public WidgetItemView()
     {
@@ -13,9 +14,11 @@ public partial class WidgetItemView : UserControl
 
     public async void OnActivateWidgetClicked(object? sender, RoutedEventArgs args)
     {
-        if (DataContext is not WidgetItemViewModel vm)
-            return;
+        await ViewModel.WidgetLauncher.ExecuteAsync();
+    }
 
-        await vm.WidgetLauncher.ExecuteAsync();
+    public void OnDeleteWidgetClicked(object? sender, RoutedEventArgs args)
+    {
+        ViewModel.OnRemoveRequested?.Invoke(this, EventArgs.Empty);
     }
 }

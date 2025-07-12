@@ -1,6 +1,8 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media;
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 
 namespace Widgets.Utils;
 

@@ -1,22 +1,20 @@
-using Avalonia.Controls;
 using Widgets.Screens.ViewModels;
 using Widgets.Utils;
 
 namespace Widgets.Screens.Views;
 
-public partial class TimerWidgetWindow : Window
+public partial class TimerWidgetWindow : Window<TimerWidgetWindowViewModel>
 {
-    public TimerWidgetWindow()
+    public TimerWidgetWindow() : base(new TimerWidgetWindowViewModel())
     {
         InitializeComponent();
         Initialize();
     }
 
-    public TimerWidgetWindow(TimerWidgetWindowViewModel vm)
+    public TimerWidgetWindow(TimerWidgetWindowViewModel vm) : base(vm)
     {
         InitializeComponent();
         Initialize();
-        DataContext = vm;
     }
 
     private void Initialize()

@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using Widgets.Controls.ViewModels;
+using Widgets.Controls.Views;
 using Widgets.Features;
 using Widgets.Helpers;
 using Widgets.Utils;
@@ -14,14 +15,13 @@ namespace Widgets.Screens.ViewModels;
 public class WidgetObservableCollection : ObservableCollection<WidgetItemViewModel>
 {
     public IEnumerable<IWidgetLauncher> GetItemsToSave() => Items
-        .Where(x => x.SaveToFile)
+        .Where(x => x.ShouldPersist)
         .Select(x => x.WidgetLauncher);
 }
 
 public partial class MainWindowViewModel : ViewModelBase
 {
     public WidgetObservableCollection Widgets { get; } = [];
-    private int CreatedWidgetsCount => Widgets.Count;
 
     public MainWindowViewModel()
     {
@@ -29,7 +29,7 @@ public partial class MainWindowViewModel : ViewModelBase
         LoadWidgets();
     }
 
-    private async void OnCollectionChanged(object? sender, EventArgs e)
+    private async void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         await LauncherStorage.SaveAsync(Widgets.GetItemsToSave());
     }
@@ -37,23 +37,42 @@ public partial class MainWindowViewModel : ViewModelBase
     private async void LoadWidgets()
     {
         await foreach (var item in LauncherStorage.LoadAsync())
-        {
-            Widgets.Add(new WidgetItemViewModel(item));
-        }
+            AddWidget(item);
 
+#if DEBUG
         foreach (var vm in SampleWidgetsHelper.GetSampleWidgets())
         {
-            vm.SaveToFile = false;
-            Widgets.Add(vm);
+            vm.ShouldPersist = false;
+            AddWidget(vm);
         }
+#endif
     }
 
     [RelayCommand]
     private void CreateNewWidget()
     {
-        Widgets.Insert(0, new WidgetItemViewModel(new TimerWidgetLauncher
+        AddWidget(new TimerWidgetLauncher
         {
-            Title = $"Created Widget {CreatedWidgetsCount+1}"
-        }));
+            Title = $"Created Widget {Widgets.Count + 1}"
+        }, true);
+    }
+
+    private void AddWidget(IWidgetLauncher launcher, bool insertAtStart = false)
+    {
+        var vm = new WidgetItemViewModel(launcher);
+        vm.OnRemoveRequested += (s, e) =>
+        {
+            var view = (WidgetItemView)s!;
+            Widgets.Remove(view.ViewModel);
+        };
+        AddWidget(vm, insertAtStart);
+    }
+    
+    private void AddWidget(WidgetItemViewModel vm, bool insertAtStart = false)
+    {
+        if (insertAtStart)
+            Widgets.Insert(0, vm);
+        else
+            Widgets.Add(vm);
     }
 }

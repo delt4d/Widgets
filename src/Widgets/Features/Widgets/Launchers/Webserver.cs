@@ -12,10 +12,10 @@ public class WebserverWidgetLauncher : WidgetLauncherBase
 {
     public WidgetWindow? Window { get; private set; }
 
-    [WidgetAdditional("Url")]
+    [WidgetArgs("Url")]
     public string Url { get; set; } = "https://google.com";
 
-    [WidgetAdditional("ReuseWindow")]
+    [WidgetArgs("ReuseWindow")]
     public bool ReuseWindow { get; set; } = false;
 
     public override Task ExecuteAsync(CancellationToken? cancellationToken = null)

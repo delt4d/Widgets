@@ -6,11 +6,11 @@ namespace Widgets.Features;
 [JsonObject(MemberSerialization.OptOut)]
 public record WidgetData(string Name, string Title)
 {
-    public Dictionary<string, object> Additional { get; set; } = [];
+    public Dictionary<string, object> Args { get; set; } = [];
 
-    public T GetAdditional<T>(string key)
+    public T GetArgs<T>(string key)
     {
-        if (!Additional.TryGetValue(key, out var value))
+        if (!Args.TryGetValue(key, out var value))
             return default!;
 
         return (T)value;

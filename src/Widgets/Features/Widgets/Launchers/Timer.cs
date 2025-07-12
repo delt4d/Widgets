@@ -10,7 +10,7 @@ public class TimerWidgetLauncher : WidgetLauncherBase
 {
     public TimerWidgetWindow? Window { get; private set; }
 
-    [WidgetAdditional("ReuseWindow")]
+    [WidgetArgs("ReuseWindow")]
     public bool ReuseWindow { get; set; } = false;
 
     public override Task ExecuteAsync(CancellationToken? cancellationToken = null)

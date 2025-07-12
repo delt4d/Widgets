@@ -18,17 +18,17 @@ public abstract class WidgetLauncherBase : IWidgetLauncher
         var launcherAttr = type.GetCustomAttribute<WidgetLauncherAttribute>() ??
             throw new InvalidOperationException("Missing WidgetLauncher attribute.");
 
-        var additional = type
+        var args = type
             .GetProperties()
-            .Where(p => p.IsDefined(typeof(WidgetAdditionalAttribute)))
+            .Where(p => p.IsDefined(typeof(WidgetArgsAttribute)))
             .ToDictionary(
-                p => p.GetCustomAttribute<WidgetAdditionalAttribute>()!.Key,
+                p => p.GetCustomAttribute<WidgetArgsAttribute>()!.Key,
                 p => p.GetValue(this) ?? new object()
             );
 
         return new WidgetData(launcherAttr.Type, Title)
         {
-            Additional = additional
+            Args = args
         };
     }
     
@@ -36,11 +36,11 @@ public abstract class WidgetLauncherBase : IWidgetLauncher
     {
         var type = GetType();
 
-        foreach (var prop in type.GetProperties().Where(p => p.IsDefined(typeof(WidgetAdditionalAttribute))))
+        foreach (var prop in type.GetProperties().Where(p => p.IsDefined(typeof(WidgetArgsAttribute))))
         {
-            var key = prop.GetCustomAttribute<WidgetAdditionalAttribute>()!.Key;
+            var key = prop.GetCustomAttribute<WidgetArgsAttribute>()!.Key;
 
-            if (data.Additional != null && data.Additional.TryGetValue(key, out var value))
+            if (data.Args != null && data.Args.TryGetValue(key, out var value))
             {
                 var converted = Convert.ChangeType(value, prop.PropertyType);
                 prop.SetValue(this, converted);

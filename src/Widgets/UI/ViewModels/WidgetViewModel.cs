@@ -1,5 +1,9 @@
-﻿namespace Widgets.UI.ViewModels;
+﻿using Widgets.Features.Widget;
 
-public partial class WidgetViewModel : ViewModelBase
+namespace Widgets.UI.ViewModels;
+
+public partial class WidgetViewModel(WidgetData data) : ViewModelBase
 {
+    public string Title => Data.Title;
+    public WidgetData Data { get; set; } = data;
 }

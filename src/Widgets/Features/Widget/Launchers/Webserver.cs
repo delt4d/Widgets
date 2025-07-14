@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using System.Threading;
 using System.Threading.Tasks;
 using WebViewControl;
+using Widgets.UI.ViewModels;
 using Widgets.UI.Views;
 
 namespace Widgets.Features.Widget;
@@ -43,7 +44,7 @@ public class WebserverWidgetLauncher : WidgetLauncherBase
         if (Window is not null && ReuseWindow)
             return Window;
 
-        Window = new WidgetWindow();
+        Window = new WidgetWindow(new WidgetViewModel(GetData()));
         Window.Closed += (_, _) => Window = null;
 
         return Window;

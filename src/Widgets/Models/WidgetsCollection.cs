@@ -33,15 +33,27 @@ public class WidgetsCollection : ObservableCollection<WidgetItemViewModel>
 
     public async Task LoadWidgets()
     {
-        Items.Clear();
+        var items = new List<WidgetItemViewModel>();
 
         foreach (var vm in SampleWidgets)
-            Add(vm);
+        {
+            items.Add(vm);
+        }
 
         await foreach (var launcher in LauncherStorage.LoadAsync())
         {
-            var vm = CreateWidget(launcher);
-            Add(vm);
+            items.Add(CreateWidget(launcher));
+        }
+
+        Clear();
+        AddRange(items);
+    }
+
+    public void AddRange(IEnumerable<WidgetItemViewModel> items)
+    {
+        foreach (var item in items)
+        {
+            Add(item);
         }
     }
 

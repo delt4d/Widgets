@@ -1,7 +1,7 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Widgets.UI.ViewModels"
-        xmlns:cv="using:Widgets.UI.Views"
+        xmlns:v="using:Widgets.UI.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -32,7 +32,7 @@
                 <ItemsControl ItemsSource="{CompiledBinding Widgets}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <cv:WidgetItemControl Margin="0,0,0,2"  />
+                            <v:WidgetItemControl Margin="0,0,0,2"  />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

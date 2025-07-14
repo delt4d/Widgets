@@ -3,15 +3,15 @@ using Widgets.Utils;
 
 namespace Widgets.UI.Views;
 
-public partial class TimerWidgetWindow : Window<TimerWidgetWindowViewModel>
+public partial class TimerWidgetWindow : Window<TimerWidgetViewModel>
 {
-    public TimerWidgetWindow() : base(new TimerWidgetWindowViewModel())
+    public TimerWidgetWindow() : base(new TimerWidgetViewModel())
     {
         InitializeComponent();
         Initialize();
     }
 
-    public TimerWidgetWindow(TimerWidgetWindowViewModel vm) : base(vm)
+    public TimerWidgetWindow(TimerWidgetViewModel vm) : base(vm)
     {
         InitializeComponent();
         Initialize();

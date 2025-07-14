@@ -17,11 +17,11 @@ public class WidgetObservableCollection : ObservableCollection<WidgetItemViewMod
         .Select(x => x.WidgetLauncher);
 }
 
-public partial class MainWindowViewModel : ViewModelBase
+public partial class MainViewModel : ViewModelBase
 {
     public WidgetObservableCollection Widgets { get; } = [];
 
-    public MainWindowViewModel()
+    public MainViewModel()
     {
         Widgets.CollectionChanged += OnCollectionChanged;
         LoadWidgets();
@@ -60,7 +60,7 @@ public partial class MainWindowViewModel : ViewModelBase
         var vm = new WidgetItemViewModel(launcher);
         vm.OnRemoveRequested += (s, e) =>
         {
-            var view = (WidgetItemView)s!;
+            var view = (WidgetItemControl)s!;
             Widgets.Remove(view.ViewModel);
         };
         AddWidget(vm, insertAtStart);

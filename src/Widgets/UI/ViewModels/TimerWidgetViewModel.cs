@@ -4,7 +4,7 @@ using Widgets.Features.TimerManager;
 
 namespace Widgets.UI.ViewModels;
 
-public partial class TimerWidgetWindowViewModel : ViewModelBase
+public partial class TimerWidgetViewModel : ViewModelBase
 {
     [ObservableProperty]
     private string formatedTime = "00:00:00";
@@ -20,7 +20,7 @@ public partial class TimerWidgetWindowViewModel : ViewModelBase
 
     private readonly TimerManager _timerManager = new();
 
-    public TimerWidgetWindowViewModel()
+    public TimerWidgetViewModel()
     {
         _timerManager.Events = GetEvents();
     }

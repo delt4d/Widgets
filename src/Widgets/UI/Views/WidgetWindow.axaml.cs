@@ -5,7 +5,7 @@ using Widgets.Utils;
 
 namespace Widgets.UI.Views;
 
-public partial class WidgetWindow : Window<WidgetWindowViewModel>
+public partial class WidgetWindow : Window<WidgetViewModel>
 {
     public WebView? WebViewComponent { get; set; }
 

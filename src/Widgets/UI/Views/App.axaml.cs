@@ -26,7 +26,7 @@ public partial class App : Application
             {
                 MainWindow = new MainWindow()
                 {
-                    DataContext = new MainWindowViewModel(),
+                    DataContext = new MainViewModel(),
                     ClosingBehavior = Avalonia.Controls.WindowClosingBehavior.OwnerWindowOnly
                 },
                 Exit = (s,e) =>

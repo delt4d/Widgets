@@ -5,9 +5,9 @@ using Widgets.Utils;
 
 namespace Widgets.UI.Views;
 
-public partial class WidgetItemView : UserControl<WidgetItemViewModel>
+public partial class WidgetItemControl : UserControl<WidgetItemViewModel>
 {
-    public WidgetItemView()
+    public WidgetItemControl()
     {
         InitializeComponent();
     }

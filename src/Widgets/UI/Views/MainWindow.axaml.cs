@@ -6,7 +6,7 @@ using Widgets.Utils;
 
 namespace Widgets.UI.Views;
 
-public partial class MainWindow : Window<MainWindowViewModel>
+public partial class MainWindow : Window<MainViewModel>
 {
     public MainWindow()
     {

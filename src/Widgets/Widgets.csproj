@@ -26,10 +26,4 @@
     <AvaloniaResource Include="Resources\**\*" />
     <AvaloniaResource Include="Assets\**\*" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Controls\Views\WidgetItemView.axaml.cs">
-      <DependentUpon>WidgetItemView.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
 </Project>

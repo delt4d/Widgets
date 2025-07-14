@@ -2,7 +2,7 @@
 
 namespace Widgets.Utils;
 
-public class Window<TViewModel> : Avalonia.Controls.Window
+public class Window<TViewModel> : Avalonia.Controls.Window 
 {
     public EventHandler? ViewModelLoaded;
     public bool IsViewModelLoaded { get; private set; } = false;

@@ -6,14 +6,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Widgets.UI.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
+        x:DataType="vm:MainViewModel"
         Icon="/Resources/avalonia-logo.ico"
         Title="Widgets">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <vm:MainViewModel/>
     </Design.DataContext>
 
     <Panel Margin="8,12,8,8">
@@ -32,7 +32,7 @@
                 <ItemsControl ItemsSource="{CompiledBinding Widgets}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <cv:WidgetItemView Margin="0,0,0,2"  />
+                            <cv:WidgetItemControl Margin="0,0,0,2"  />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

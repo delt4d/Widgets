@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Widgets.UI.Views.WidgetWindow"
-		x:DataType="vm:WidgetWindowViewModel"
+		x:DataType="vm:WidgetViewModel"
         Title="WidgetWindow">
     <Design.DataContext>
 	    <!-- This only sets the DataContext for the previewer in an IDE,
                 to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-	    <vm:WidgetWindowViewModel />
+	    <vm:WidgetViewModel />
     </Design.DataContext>
 
 	<Grid x:Name="MainGrid"></Grid>

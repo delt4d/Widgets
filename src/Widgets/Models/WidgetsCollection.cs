@@ -13,7 +13,14 @@ namespace Widgets.Models;
 
 public class WidgetsCollection : ObservableCollection<WidgetItemViewModel>
 {
-    public static readonly IEnumerable<WidgetItemViewModel> SampleWidgets = SampleWidgetsHelper.GetSampleWidgets();
+    public static readonly IEnumerable<WidgetItemViewModel> SampleWidgets;
+
+    static WidgetsCollection()
+    {
+#if DEBUG
+        SampleWidgets = SampleWidgetsHelper.GetSampleWidgets();
+#endif
+    }
 
     public IEnumerable<IWidgetLauncher> Launchers =>
         Items.Where(x => !SampleWidgets.Contains(x))

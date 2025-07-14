@@ -9,6 +9,12 @@ namespace Widgets.UI.Views;
 
 public partial class App : Application
 {
+    public AppViewModel ViewModel
+    {
+        get => (AppViewModel)DataContext!;
+        set => DataContext = value;
+    }
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -22,28 +28,31 @@ public partial class App : Application
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
 
-            var appViewModel = new AppViewModel()
+            var mainWindow = new MainWindow()
             {
-                MainWindow = new MainWindow()
-                {
-                    DataContext = new MainViewModel(),
-                    ClosingBehavior = Avalonia.Controls.WindowClosingBehavior.OwnerWindowOnly
-                },
-                Exit = (s,e) =>
-                {
-                    desktop.Shutdown(0);
-                }
+                ClosingBehavior = Avalonia.Controls.WindowClosingBehavior.OwnerWindowOnly
             };
-            appViewModel.MainWindow.Closing += (s,e) =>
+            mainWindow.Closing += (s,e) =>
             {
                 e.Cancel = true;
-                appViewModel.MainWindow.Hide();
+                mainWindow.Hide();
             };
 
-            DataContext = appViewModel;
+            ViewModel = new AppViewModel()
+            {
+                Exit = (s, e) =>
+                {
+                    desktop.Shutdown(0);
+                },
+                ShowMainWindow = (s, e) =>
+                {
+                    mainWindow.Show();
+                    mainWindow.Activate();
+                }
+            };
 
             desktop.ShutdownMode = Avalonia.Controls.ShutdownMode.OnExplicitShutdown;
-            desktop.MainWindow = appViewModel.MainWindow;
+            desktop.MainWindow = mainWindow;
         }
 
         base.OnFrameworkInitializationCompleted();

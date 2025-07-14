@@ -1,20 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System;
-using Widgets.UI.Views;
 
 namespace Widgets.UI.ViewModels;
 
 public partial class AppViewModel : ViewModelBase
 {
     public EventHandler? Exit { get; set; }
-
-    public required MainWindow MainWindow { get; set; }
+    public EventHandler? ShowMainWindow;
 
     [RelayCommand]
-    public void ShowMainWindow()
+    public void ShowMainWindowCommand()
     {
-        MainWindow.Show();
-        MainWindow.Activate();
+        ShowMainWindow?.Invoke(this, EventArgs.Empty);
     }
 
     [RelayCommand]

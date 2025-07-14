@@ -8,7 +8,13 @@ namespace Widgets.UI.Views;
 
 public partial class MainWindow : Window<MainViewModel>
 {
-    public MainWindow()
+    public MainWindow() : base(new MainViewModel())
+    {
+        InitializeComponent();
+        Initialize();
+    }
+
+    public MainWindow(MainViewModel vm) : base(vm)
     {
         InitializeComponent();
         Initialize();

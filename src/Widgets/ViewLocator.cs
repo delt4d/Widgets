@@ -19,6 +19,7 @@ public class ViewLocator : IDataTemplate
 
     static ViewLocator()
     {
+        Register<MainViewModel, MainWindow>();
         Register<WidgetItemViewModel, WidgetItemControl>();
         Register<WidgetViewModel, WidgetWindow>();
         Register<TimerWidgetViewModel, TimerWidgetWindow>();

@@ -8,7 +8,7 @@
 	<TrayIcon.Icons>
 		<TrayIcons>
 			<TrayIcon 
-				Command="{CompiledBinding ShowMainWindow}"
+				Command="{CompiledBinding ShowMainWindowCommand}"
 				Icon="/Resources/avalonia-logo.ico"
 				ToolTipText="Widgets">
 				<TrayIcon.Menu>

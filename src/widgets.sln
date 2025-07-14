@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Widgets.Desktop", "Widgets.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project Files", "Project Files", "{E33AB54A-7696-69CB-C1F9-ED1A464D0C9F}"
 	ProjectSection(SolutionItems) = preProject
-		launchers.dev.json = launchers.dev.json
 		..\.gitignore = ..\.gitignore
 		..\README.md = ..\README.md
+		launchers.dev.json = launchers.dev.json
 	EndProjectSection
 EndProject
 Global

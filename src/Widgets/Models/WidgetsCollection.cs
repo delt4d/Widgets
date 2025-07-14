@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Threading.Tasks;
+using Widgets.Features.Widget;
+using Widgets.Helpers;
+using Widgets.UI.ViewModels;
+using Widgets.Utils;
+
+namespace Widgets.Models;
+
+public class WidgetsCollection : ObservableCollection<WidgetItemViewModel>
+{
+    public static readonly IEnumerable<WidgetItemViewModel> SampleWidgets = SampleWidgetsHelper.GetSampleWidgets();
+
+    public IEnumerable<IWidgetLauncher> Launchers =>
+        Items.Where(x => !SampleWidgets.Contains(x))
+            .Select(x => x.WidgetLauncher);
+
+    public WidgetsCollection()
+    {
+        CollectionChanged += OnCollectionChanged;
+    }
+
+    public async Task LoadWidgets()
+    {
+        Items.Clear();
+
+        foreach (var vm in SampleWidgets)
+            Add(vm);
+
+        await foreach (var launcher in LauncherStorage.LoadAsync())
+        {
+            var vm = CreateWidget(launcher);
+            Add(vm);
+        }
+    }
+
+    public void CreateNewWidget()
+    {
+        var launcher = new TimerWidgetLauncher
+        {
+            Title = $"Created Widget {Count - SampleWidgets.Count() + 1}"
+        };
+        var vm = CreateWidget(launcher);
+        Insert(0, vm);
+    }
+
+    private WidgetItemViewModel CreateWidget(IWidgetLauncher launcher)
+    {
+        var vm = new WidgetItemViewModel(launcher);
+        vm.DeleteEvent += (s, e) => Remove(vm);
+        return vm;
+    }
+    private async void OnCollectionChanged(
+        object? sender,
+        NotifyCollectionChangedEventArgs e)
+    {
+        try
+        {   
+            await LauncherStorage.SaveAsync(Launchers);
+        } catch(Exception) {}
+    }
+}

@@ -6,9 +6,8 @@ namespace Widgets.UI.ViewModels;
 public class WidgetItemViewModel : ViewModelBase
 {
     public string Title => WidgetLauncher.Title;
-    public bool ShouldPersist { get; set; } = true;
     public IWidgetLauncher WidgetLauncher { get; set; }
-    public EventHandler? RemoveItemEvent;
+    public EventHandler? DeleteEvent;
     public WidgetItemViewModel()
     {
         WidgetLauncher = WidgetLauncherBase.Default;

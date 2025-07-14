@@ -10,7 +10,7 @@ internal static class SampleWidgetsHelper
     {
         var widget1 = new WidgetItemViewModel(new WebserverWidgetLauncher
         {
-            Title = "Webview Widget 1",
+            Title = "Webview Widget",
             Url = "http://localhost:5500/"
         });
 
@@ -18,7 +18,7 @@ internal static class SampleWidgetsHelper
         {
             ReuseWindow = true,
             Url = "http://localhost:5500/",
-            Title = "Webview Widget 2 | Same Window"
+            Title = "Webview Widget | Same Window"
         });
 
         var widget3 = new WidgetItemViewModel(new TimerWidgetLauncher

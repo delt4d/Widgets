@@ -1,12 +1,8 @@
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Avalonia.Interactivity;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Widgets.Features;
-using Widgets.ViewModels;
+using Widgets.Features.TimerManager;
 
-namespace Widgets.Screens.ViewModels;
+namespace Widgets.UI.ViewModels;
 
 public partial class TimerWidgetWindowViewModel : ViewModelBase
 {

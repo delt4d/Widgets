@@ -3,11 +3,9 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using System.Linq;
-using Widgets.Screens.ViewModels;
-using Widgets.Screens.Views;
-using Widgets.ViewModels;
+using Widgets.UI.ViewModels;
 
-namespace Widgets.Views;
+namespace Widgets.UI.Views;
 
 public partial class App : Application
 {

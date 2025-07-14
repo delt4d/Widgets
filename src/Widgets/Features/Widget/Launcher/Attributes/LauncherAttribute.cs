@@ -1,6 +1,6 @@
 using System;
 
-namespace Widgets.Features.Attributes;
+namespace Widgets.Features.Widget;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class WidgetLauncherAttribute(string name) : Attribute

@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using Widgets.Controls.ViewModels;
-using Widgets.Controls.Views;
-using Widgets.Features;
+using Widgets.UI.Views;
+using Widgets.Features.Widget;
 using Widgets.Helpers;
 using Widgets.Utils;
-using Widgets.ViewModels;
 
-namespace Widgets.Screens.ViewModels;
+namespace Widgets.UI.ViewModels;
 
 public class WidgetObservableCollection : ObservableCollection<WidgetItemViewModel>
 {

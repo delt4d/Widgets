@@ -1,9 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Widgets.Features.Attributes;
-using Widgets.Screens.Views;
+using Widgets.UI.Views;
 
-namespace Widgets.Features;
+namespace Widgets.Features.Widget;
 
 [WidgetLauncher("TimerWidget")]
 public class TimerWidgetLauncher : WidgetLauncherBase

@@ -1,7 +1,7 @@
-using Widgets.Screens.ViewModels;
+using Widgets.UI.ViewModels;
 using Widgets.Utils;
 
-namespace Widgets.Screens.Views;
+namespace Widgets.UI.Views;
 
 public partial class TimerWidgetWindow : Window<TimerWidgetWindowViewModel>
 {

@@ -4,9 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Widgets.Features.Attributes;
 
-namespace Widgets.Features;
+namespace Widgets.Features.Widget;
 
 public abstract class WidgetLauncherBase : IWidgetLauncher
 {

@@ -1,4 +1,4 @@
-﻿namespace Widgets.Features;
+﻿namespace Widgets.Features.TimerManager;
 
 public class TimerEvents
 {

@@ -1,6 +1,4 @@
-﻿using Widgets.ViewModels;
-
-namespace Widgets.Screens.ViewModels;
+﻿namespace Widgets.UI.ViewModels;
 
 public partial class WidgetWindowViewModel : ViewModelBase
 {

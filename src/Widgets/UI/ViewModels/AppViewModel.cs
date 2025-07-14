@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using System;
-using Widgets.Screens.Views;
+using Widgets.UI.Views;
 
-namespace Widgets.ViewModels;
+namespace Widgets.UI.ViewModels;
 
 public partial class AppViewModel : ViewModelBase
 {

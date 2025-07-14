@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Widgets.Features;
+namespace Widgets.Features.TimerManager;
 
 public class TimerManager
 {

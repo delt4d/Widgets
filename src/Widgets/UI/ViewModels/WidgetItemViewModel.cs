@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Windows.Input;
-using Widgets.Features;
-using Widgets.ViewModels;
+using Widgets.Features.Widget;
 
-namespace Widgets.Controls.ViewModels;
+namespace Widgets.UI.ViewModels;
 
 public class WidgetItemViewModel : ViewModelBase
 {

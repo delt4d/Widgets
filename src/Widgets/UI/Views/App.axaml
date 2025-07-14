@@ -1,7 +1,7 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:vm="using:Widgets.ViewModels"
-             x:Class="Widgets.Views.App"
+			 xmlns:vm="using:Widgets.UI.ViewModels"
+             x:Class="Widgets.UI.Views.App"
 			 x:DataType="vm:AppViewModel"
              xmlns:local="using:Widgets"
              RequestedThemeVariant="Dark">

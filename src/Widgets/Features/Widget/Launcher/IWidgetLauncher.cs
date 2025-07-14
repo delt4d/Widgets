@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Widgets.Features;
+namespace Widgets.Features.Widget;
 
 public interface IWidgetLauncher
 {

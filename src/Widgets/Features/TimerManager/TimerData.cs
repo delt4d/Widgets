@@ -1,7 +1,7 @@
 using System;
 using Avalonia.Threading;
 
-namespace Widgets.Features;
+namespace Widgets.Features.TimerManager;
 
 public class TimerData
 {

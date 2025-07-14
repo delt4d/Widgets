@@ -1,9 +1,9 @@
 using System;
 using Avalonia.Interactivity;
-using Widgets.Controls.ViewModels;
+using Widgets.UI.ViewModels;
 using Widgets.Utils;
 
-namespace Widgets.Controls.Views;
+namespace Widgets.UI.Views;
 
 public partial class WidgetItemView : UserControl<WidgetItemViewModel>
 {

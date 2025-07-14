@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Widgets.Controls.ViewModels;
-using Widgets.Features;
+using Widgets.UI.ViewModels;
+using Widgets.Features.Widget;
 
 namespace Widgets.Helpers;
 

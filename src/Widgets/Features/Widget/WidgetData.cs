@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Widgets.Features;
+namespace Widgets.Features.Widget;
 
 [JsonObject(MemberSerialization.OptOut)]
 public record WidgetData(string Name, string Title)

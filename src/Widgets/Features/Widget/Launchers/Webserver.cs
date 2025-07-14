@@ -2,10 +2,9 @@ using Avalonia.Controls;
 using System.Threading;
 using System.Threading.Tasks;
 using WebViewControl;
-using Widgets.Features.Attributes;
-using Widgets.Screens.Views;
+using Widgets.UI.Views;
 
-namespace Widgets.Features;
+namespace Widgets.Features.Widget;
 
 [WidgetLauncher("Webserver")]
 public class WebserverWidgetLauncher : WidgetLauncherBase

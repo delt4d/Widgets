@@ -8,7 +8,7 @@ public class WidgetItemViewModel : ViewModelBase
     public string Title => WidgetLauncher.Title;
     public bool ShouldPersist { get; set; } = true;
     public IWidgetLauncher WidgetLauncher { get; set; }
-    public EventHandler? OnRemoveRequested;
+    public EventHandler? RemoveItemEvent;
     public WidgetItemViewModel()
     {
         WidgetLauncher = WidgetLauncherBase.Default;

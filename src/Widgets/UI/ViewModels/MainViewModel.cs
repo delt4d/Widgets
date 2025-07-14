@@ -58,7 +58,7 @@ public partial class MainViewModel : ViewModelBase
     private void AddWidget(IWidgetLauncher launcher, bool insertAtStart = false)
     {
         var vm = new WidgetItemViewModel(launcher);
-        vm.OnRemoveRequested += (s, e) =>
+        vm.RemoveItemEvent += (s, e) =>
         {
             var view = (WidgetItemControl)s!;
             Widgets.Remove(view.ViewModel);

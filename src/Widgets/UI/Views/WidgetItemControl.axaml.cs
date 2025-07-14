@@ -19,6 +19,6 @@ public partial class WidgetItemControl : UserControl<WidgetItemViewModel>
 
     public void OnDeleteWidgetClicked(object? sender, RoutedEventArgs args)
     {
-        ViewModel.OnRemoveRequested?.Invoke(this, EventArgs.Empty);
+        ViewModel.RemoveItemEvent?.Invoke(this, EventArgs.Empty);
     }
 }

@@ -2,7 +2,7 @@
 using Avalonia.Media.Fonts;
 using System;
 using System.IO;
-using Widgets.Views;
+using Widgets.UI.Views;
 
 namespace Widgets.Desktop;
 

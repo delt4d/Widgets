@@ -1,0 +1,30 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:vm="using:Widgets.UI.ViewModels"
+             x:Class="Widgets.UI.Views.App"
+			 x:DataType="vm:AppViewModel"
+             xmlns:local="using:Widgets"
+             RequestedThemeVariant="Dark">
+	<TrayIcon.Icons>
+		<TrayIcons>
+			<TrayIcon 
+				Command="{CompiledBinding ShowMainWindowCommand}"
+				Icon="/Resources/avalonia-logo.ico"
+				ToolTipText="Widgets">
+				<TrayIcon.Menu>
+					<NativeMenu>
+						<NativeMenuItem Command="{CompiledBinding ExitCommand}" Header="Exit" />
+					</NativeMenu>
+				</TrayIcon.Menu>
+			</TrayIcon>
+		</TrayIcons>
+	</TrayIcon.Icons>
+	
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+</Application>

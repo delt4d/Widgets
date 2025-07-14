@@ -1,8 +1,8 @@
 using System;
 
-namespace Widgets.Utils;
+namespace Avalonia.Controls;
 
-public class UserControl<TViewModel> : Avalonia.Controls.UserControl
+public class UserControl<TViewModel> : UserControl
 {
     public EventHandler? ViewModelLoaded;
     public bool IsViewModelLoaded { get; private set; } = false;

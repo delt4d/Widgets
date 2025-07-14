@@ -2,11 +2,8 @@ using System;
 using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using Widgets.Controls.ViewModels;
-using Widgets.Controls.Views;
-using Widgets.Screens.ViewModels;
-using Widgets.Screens.Views;
-using Widgets.ViewModels;
+using Widgets.UI.ViewModels;
+using Widgets.UI.Views;
 
 namespace Widgets;
 
@@ -22,9 +19,10 @@ public class ViewLocator : IDataTemplate
 
     static ViewLocator()
     {
-        Register<WidgetItemViewModel, WidgetItemView>();
-        Register<WidgetWindowViewModel, WidgetWindow>();
-        Register<TimerWidgetWindowViewModel, TimerWidgetWindow>();
+        Register<MainViewModel, MainWindow>();
+        Register<WidgetItemViewModel, WidgetItemControl>();
+        Register<WidgetViewModel, WidgetWindow>();
+        Register<TimerWidgetViewModel, TimerWidgetWindow>();
     }
 
     public Control? Build(object? param)

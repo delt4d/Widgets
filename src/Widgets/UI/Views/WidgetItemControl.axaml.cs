@@ -1,7 +1,7 @@
 using System;
+using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Widgets.UI.ViewModels;
-using Widgets.Utils;
 
 namespace Widgets.UI.Views;
 

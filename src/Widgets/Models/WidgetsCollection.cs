@@ -35,14 +35,14 @@ public class WidgetsCollection : ObservableCollection<WidgetItemViewModel>
     {
         var items = new List<WidgetItemViewModel>();
 
-        foreach (var vm in SampleWidgets)
-        {
-            items.Add(vm);
-        }
-
         await foreach (var launcher in LauncherStorage.LoadAsync())
         {
             items.Add(CreateWidget(launcher));
+        }
+
+        foreach (var vm in SampleWidgets)
+        {
+            items.Add(vm);
         }
 
         Clear();

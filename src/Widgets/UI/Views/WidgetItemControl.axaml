@@ -18,19 +18,19 @@
             Margin="4" />
 
 		<WrapPanel Grid.Column="1" ItemSpacing="4">
-			<Button Click="OnActivateWidgetClicked">
+			<Button Click="ActivateWidgetClicked">
 				<Image Width="19"
 					Height="19"
 					Source="/Assets/Icons/play.png" />
 			</Button>
 
-			<Button>
+			<Button Click="ConfigureWidgetClicked">
 				<Image Width="21"
 					Height="21"
 					Source="/Assets/Icons/eng.png" />
 			</Button>
 
-			<Button Click="OnDeleteWidgetClicked">
+			<Button Click="DeleteWidgetClicked">
 				<Image Width="19"
 					Height="19"
 					Source="/Assets/Icons/trash.png" />

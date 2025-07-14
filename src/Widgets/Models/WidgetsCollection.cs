@@ -73,13 +73,15 @@ public class WidgetsCollection : ObservableCollection<WidgetItemViewModel>
         vm.DeleteEvent += (s, e) => Remove(vm);
         return vm;
     }
+    
     private async void OnCollectionChanged(
         object? sender,
         NotifyCollectionChangedEventArgs e)
     {
         try
-        {   
+        {
             await LauncherStorage.SaveAsync(Launchers);
-        } catch(Exception) {}
+        }
+        catch (Exception) { }
     }
 }

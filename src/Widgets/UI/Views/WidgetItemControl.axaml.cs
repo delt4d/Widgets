@@ -12,12 +12,18 @@ public partial class WidgetItemControl : UserControl<WidgetItemViewModel>
         InitializeComponent();
     }
 
-    public async void OnActivateWidgetClicked(object? sender, RoutedEventArgs args)
+    public async void ActivateWidgetClicked(object? sender, RoutedEventArgs args)
     {
         await ViewModel.WidgetLauncher.ExecuteAsync();
     }
 
-    public void OnDeleteWidgetClicked(object? sender, RoutedEventArgs args)
+    public void ConfigureWidgetClicked(object? sender, RoutedEventArgs args)
+    {
+        var window = new WidgetSettingsWindow();
+        window.ShowDialog<MainWindow>(App.MainWindow);
+    }
+
+    public void DeleteWidgetClicked(object? sender, RoutedEventArgs args)
     {
         ViewModel.DeleteEvent?.Invoke(this, EventArgs.Empty);
     }

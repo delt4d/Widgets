@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
@@ -9,6 +10,8 @@ namespace Widgets.UI.Views;
 
 public partial class App : Application
 {
+    public static Window MainWindow { get; private set; } = default!;
+    
     public AppViewModel ViewModel
     {
         get => (AppViewModel)DataContext!;
@@ -28,14 +31,14 @@ public partial class App : Application
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
 
-            var mainWindow = new MainWindow()
+            MainWindow = new MainWindow()
             {
-                ClosingBehavior = Avalonia.Controls.WindowClosingBehavior.OwnerWindowOnly
+                ClosingBehavior = WindowClosingBehavior.OwnerWindowOnly
             };
-            mainWindow.Closing += (s,e) =>
+            MainWindow.Closing += (s,e) =>
             {
                 e.Cancel = true;
-                mainWindow.Hide();
+                MainWindow.Hide();
             };
 
             ViewModel = new AppViewModel()
@@ -46,13 +49,13 @@ public partial class App : Application
                 },
                 ShowMainWindow = (s, e) =>
                 {
-                    mainWindow.Show();
-                    mainWindow.Activate();
+                    MainWindow.Show();
+                    MainWindow.Activate();
                 }
             };
 
-            desktop.ShutdownMode = Avalonia.Controls.ShutdownMode.OnExplicitShutdown;
-            desktop.MainWindow = mainWindow;
+            desktop.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+            desktop.MainWindow = MainWindow;
         }
 
         base.OnFrameworkInitializationCompleted();
